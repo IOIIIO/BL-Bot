@@ -1288,7 +1288,7 @@ class Audio:
         """Reports info about the cache.
             - Current size of the cache.
             - Maximum cache size. User setting or minimum, whichever is higher.
-            - Minimum cache size. Automatically determined by number of servers Red is running on.
+            - Minimum cache size. Automatically determined by number of servers Jim is running on.
         """
         await self.bot.say("Cache stats:\n"
                            "Current size: {:.2f} MB\n"
@@ -1944,7 +1944,7 @@ class Audio:
 
     @commands.command(pass_context=True, no_pm=True)
     async def sing(self, ctx):
-        """Makes Red sing one of her songs"""
+        """Makes Jim sing one of her songs"""
         ids = ("zGTkAVsrfg8", "cGMWL8cOeAU", "vFrjMq4aL-g", "WROI5WYBU_A",
                "41tIUr_ex3g", "f9O2Rjn1azc")
         url = "https://www.youtube.com/watch?v={}".format(choice(ids))

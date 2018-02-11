@@ -302,7 +302,7 @@ def initialize(bot_class=Bot, formatter_class=Formatter):
         owner = await set_bot_owner()
 
         print("-----------------")
-        print("Red - Discord Bot")
+        print("Jim - Discord Bot")
         print("-----------------")
         print(str(bot.user))
         print("\nConnected to:")
@@ -314,7 +314,7 @@ def initialize(bot_class=Bot, formatter_class=Formatter):
             prefix_label += 'es'
         print("{}: {}".format(prefix_label, " ".join(bot.settings.prefixes)))
         print("Owner: " + str(owner))
-        print("{}/{} active cogs with {} commands".format(
+        print("{}/{} active modules with {} commands".format(
             len(bot.cogs), total_cogs, len(bot.commands)))
         print("-----------------")
 
@@ -324,9 +324,8 @@ def initialize(bot_class=Bot, formatter_class=Formatter):
             bot.oauth_url = url
             print(url)
 
-        print("\nOfficial server: https://discord.gg/red")
 
-        print("Make sure to keep your bot updated. Select the 'Update' "
+        print("Make sure to keep the bot updated. Select the 'Update' "
               "option from the launcher.")
 
         await bot.get_cog('Owner').disable_commands()
@@ -405,7 +404,7 @@ def interactive_setup(settings):
     first_run = settings.bot_settings == settings.default_settings
 
     if first_run:
-        print("Red - First run configuration\n")
+        print("Jim - First run configuration\n")
         print("If you haven't already, create a new account:\n"
               "https://twentysix26.github.io/Red-Docs/red_guide_bot_accounts/"
               "#creating-a-new-bot-account")
@@ -458,10 +457,8 @@ def interactive_setup(settings):
         settings.save_settings()
 
         print("\nThe configuration is done. Leave this window always open to"
-              " keep Red online.\nAll commands will have to be issued through"
+              " keep Jim online.\nAll commands will have to be issued through"
               " Discord's chat, *this window will now be read only*.\n"
-              "Please read this guide for a good overview on how Red works:\n"
-              "https://twentysix26.github.io/Red-Docs/red_getting_started/\n"
               "Press enter to continue")
         input("\n")
 
