@@ -25,8 +25,8 @@ from collections import Counter
 from io import TextIOWrapper
 
 #
-# Red, a Discord bot by Twentysix, based on discord.py and its command
-#                             extension.
+# Jim, a Discord bot by NoOne, based on discord.py, its command
+#                             extension and a Discord bot by Twentysix.
 #
 #                   https://github.com/Twentysix26/
 #
@@ -37,7 +37,7 @@ from io import TextIOWrapper
 #                 https://github.com/Rapptz/RoboDanny/
 #
 
-description = "Red - A multifunction Discord bot by Twentysix"
+description = "Jim - A multifunction Discord bot by NoOne, made for the Bounce Lounge"
 
 
 class Bot(commands.Bot):
@@ -92,10 +92,10 @@ class Bot(commands.Bot):
         return await super().send_message(*args, **kwargs)
 
     async def shutdown(self, *, restart=False):
-        """Gracefully quits Red with exit code 0
+        """Gracefully quits Jim with exit code 0
 
         If restart is True, the exit code will be 26 instead
-        The launcher automatically restarts Red when that happens"""
+        The launcher automatically restarts Jim when that happens"""
         self._shutdown_mode = not restart
         await self.logout()
 
@@ -542,7 +542,7 @@ def load_cogs(bot):
     owner_cog = bot.get_cog('Owner')
     if owner_cog is None:
         print("The owner cog is missing. It contains core functions without "
-              "which Red cannot function. Reinstall.")
+              "which Jim cannot function. Reinstall.")
         exit(1)
 
     if bot.settings._no_cogs:
