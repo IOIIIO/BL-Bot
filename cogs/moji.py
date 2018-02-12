@@ -26,7 +26,6 @@ class Moji:
     @commands.command(pass_context=True, no_pm=True)
     async def emoji(self, ctx, name: str):
         """Send a large custom emoji.
-
         Bot must be in the server with the emoji"""
         for x in list(self.bot.get_all_emojis()):
             if x.name.lower() == name.lower():
