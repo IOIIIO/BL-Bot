@@ -46,7 +46,7 @@ class Moji:
                 im.save(fp, "PNG")
 
 # You can uncomment this line if you want c:
-                #await self.bot.delete_message(ctx.message)
+                await self.bot.delete_message(ctx.message)
                 return await self.bot.send_file(ctx.message.channel, fp)
 
     @commands.group(pass_context=True, no_pm=True)
