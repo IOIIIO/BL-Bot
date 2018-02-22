@@ -26,7 +26,7 @@ REQS_NO_AUDIO_TXT = "requirements_no_audio.txt"
 FFMPEG_BUILDS_URL = "https://ffmpeg.zeranoe.com/builds/"
 
 INTRO = ("==========================\n"
-         "Jim Discord Bot - Launcher\n"
+         "Bob Discord Bot - Launcher\n"
          "==========================\n")
 
 IS_WINDOWS = os.name == "nt"
@@ -43,15 +43,15 @@ FFMPEG_FILES = {
 
 
 def parse_cli_arguments():
-    parser = argparse.ArgumentParser(description="Jim - Discord Bot's launcher")
+    parser = argparse.ArgumentParser(description="Bob - Discord Bot's launcher")
     parser.add_argument("--start", "-s",
-                        help="Starts Jim",
+                        help="Starts Bob",
                         action="store_true")
     parser.add_argument("--auto-restart",
-                        help="Autorestarts Jim in case of issues",
+                        help="Autorestarts Bob in case of issues",
                         action="store_true")
     parser.add_argument("--update-red",
-                        help="Updates Jim (git)",
+                        help="Updates Bob (git)",
                         action="store_true")
     parser.add_argument("--update-reqs",
                         help="Updates requirements (w/ audio)",
@@ -125,9 +125,9 @@ def update_red():
               "the PATH environment variable like requested in the guide.")
         return
     if code == 0:
-        print("\nJim has been updated")
+        print("\nBob has been updated")
     else:
-        print("\nJim could not update properly. If this is caused by edits "
+        print("\nBob could not update properly. If this is caused by edits "
               "you have made to the code you can try the repair option from "
               "the Maintenance submenu")
 
@@ -165,14 +165,14 @@ def reset_red(reqs=False, data=False, cogs=False, git_reset=False):
     if git_reset:
         code = subprocess.call(("git", "reset", "--hard"))
         if code == 0:
-            print("Jim has been restored to the last local commit.")
+            print("Bob has been restored to the last local commit.")
         else:
             print("The repair has failed.")
 
 
 def download_ffmpeg(bitness):
     clear_screen()
-    repo = "https://github.com/Twentysix26/Red-DiscordBot/raw/master/"
+    repo = "https://github.com/IOIIIO/BL-Bot/raw/master/"
     verified = []
 
     if bitness == "32bit":
@@ -281,9 +281,9 @@ def update_menu():
             status = "Basic + audio requirements installed"
         print("Status: " + status + "\n")
         print("Update:\n")
-        print("Jim:")
-        print("1. Update Jim + requirements (recommended)")
-        print("2. Update Jim")
+        print("Bob:")
+        print("1. Update Bob + requirements (recommended)")
+        print("2. Update Bob")
         print("3. Update requirements")
         print("\nOthers:")
         print("4. Update pip (might require admin privileges)")
@@ -321,7 +321,7 @@ def maintenance_menu():
     while True:
         print(INTRO)
         print("Maintenance:\n")
-        print("1. Repair Jim (discards code changes, keeps data intact)")
+        print("1. Repair Bob (discards code changes, keeps data intact)")
         print("2. Wipe 'data' folder (all settings, cogs' data...)")
         print("3. Wipe 'lib' folder (all local requirements / local installed"
               " python packages)")
@@ -345,7 +345,7 @@ def maintenance_menu():
             reset_red(reqs=True)
             wait()
         elif choice == "4":
-            print("Are you sure? This will wipe ALL your Jim's installation "
+            print("Are you sure? This will wipe ALL your Bob's installation "
                   "data.\nYou'll lose all your settings, cogs and any "
                   "modification you have made.\nThere is no going back.")
             if user_pick_yes_no():
@@ -363,7 +363,7 @@ def run_red(autorestart):
         raise RuntimeError("Couldn't find Python's interpreter")
 
     if verify_requirements() is None:
-        print("You don't have the requirements to start Jim. "
+        print("You don't have the requirements to start Bob. "
               "Install them from the launcher.")
         if not INTERACTIVE_MODE:
             exit(1)
@@ -380,13 +380,13 @@ def run_red(autorestart):
             if code == 0:
                 break
             elif code == 26:
-                print("Restarting Jim...")
+                print("Restarting Bob...")
                 continue
             else:
                 if not autorestart:
                     break
 
-    print("Jim has been terminated. Exit code: %d" % code)
+    print("Bob has been terminated. Exit code: %d" % code)
 
     if INTERACTIVE_MODE:
         wait()
@@ -443,7 +443,7 @@ def calculate_md5(filename):
 
 
 def create_fast_start_scripts():
-    """Creates scripts for fast boot of Jim without going
+    """Creates scripts for fast boot of Bob without going
     through the launcher"""
     interpreter = sys.executable
     if not interpreter:
@@ -495,7 +495,7 @@ def main():
     has_git = is_git_installed()
     is_git_installation = os.path.isdir(".git")
     if IS_WINDOWS:
-        os.system("TITLE Jim Discord Bot - Launcher")
+        os.system("TITLE Bob Discord Bot - Launcher")
     clear_screen()
 
     try:
@@ -507,20 +507,18 @@ def main():
         print(INTRO)
 
         if not is_git_installation:
-            print("WARNING: It doesn't look like Jim has been "
+            print("WARNING: It doesn't look like Bob has been "
                   "installed with git.\nThis means that you won't "
                   "be able to update and some features won't be working.\n"
-                  "A reinstallation is recommended. Follow the guide "
-                  "properly this time:\n"
-                  "https://twentysix26.github.io/Red-Docs/\n")
+                  "A reinstallation is recommended.)
 
         if not has_git:
             print("WARNING: Git not found. This means that it's either not "
                   "installed or not in the PATH environment variable like "
                   "requested in the guide.\n")
 
-        print("1. Run Jim /w autorestart in case of issues")
-        print("2. Run Jim")
+        print("1. Run Bob /w autorestart in case of issues")
+        print("2. Run Bob")
         print("3. Update")
         print("4. Install requirements")
         print("5. Maintenance (repair, reset...)")
@@ -548,13 +546,13 @@ if __name__ == '__main__':
     # Sets current directory to the script's
     os.chdir(dirname)
     if not PYTHON_OK:
-        print("Jim needs Python 3.5 or superior. Install the required "
+        print("Bob needs Python 3.5 or superior. Install the required "
               "version.\nPress enter to continue.")
         if INTERACTIVE_MODE:
             wait()
         exit(1)
     if pip is None:
-        print("Jim cannot work without the pip module. Please make sure to "
+        print("Bob cannot work without the pip module. Please make sure to "
               "install Python without unchecking any option during the setup")
         wait()
         exit(1)
@@ -569,5 +567,5 @@ if __name__ == '__main__':
     if INTERACTIVE_MODE:
         main()
     elif args.start:
-        print("Starting Jim...")
+        print("Starting Bob...")
         run_red(autorestart=args.auto_restart)

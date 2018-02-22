@@ -14,8 +14,7 @@ try:
 except ImportError:
     print("Discord.py is not installed.\n"
           "Consult the guide for your operating system "
-          "and do ALL the steps in order.\n"
-          "https://twentysix26.github.io/Red-Docs/\n")
+          "and do ALL the steps in order.\n")
     sys.exit(1)
 
 from cogs.utils.settings import Settings
@@ -25,10 +24,10 @@ from collections import Counter
 from io import TextIOWrapper
 
 #
-# Jim, a Discord bot by NoOne, based on discord.py, its command
+# Bob, a Discord bot by NoOne, based on discord.py, its command
 #                             extension and a Discord bot by Twentysix.
 #
-#                   https://github.com/Twentysix26/
+#                   https://github.com/IOIIIO/
 #
 #
 # red.py and cogs/utils/checks.py both contain some modified functions
@@ -37,7 +36,7 @@ from io import TextIOWrapper
 #                 https://github.com/Rapptz/RoboDanny/
 #
 
-description = "Jim - A multifunction Discord bot by NoOne, made for the Bounce Lounge"
+description = "Bob - A multifunction Discord bot by NoOne, made for the Bounce Lounge"
 
 
 class Bot(commands.Bot):
@@ -92,10 +91,10 @@ class Bot(commands.Bot):
         return await super().send_message(*args, **kwargs)
 
     async def shutdown(self, *, restart=False):
-        """Gracefully quits Jim with exit code 0
+        """Gracefully quits Bob with exit code 0
 
         If restart is True, the exit code will be 26 instead
-        The launcher automatically restarts Jim when that happens"""
+        The launcher automatically restarts Bob when that happens"""
         self._shutdown_mode = not restart
         await self.logout()
 
@@ -302,7 +301,7 @@ def initialize(bot_class=Bot, formatter_class=Formatter):
         owner = await set_bot_owner()
 
         print("-----------------")
-        print("Jim - Discord Bot")
+        print("Bob - Discord Bot")
         print("-----------------")
         print(str(bot.user))
         print("\nConnected to:")
@@ -404,11 +403,10 @@ def interactive_setup(settings):
     first_run = settings.bot_settings == settings.default_settings
 
     if first_run:
-        print("Jim - First run configuration\n")
+        print("Bob - First run configuration\n")
         print("If you haven't already, create a new account:\n"
-              "https://twentysix26.github.io/Red-Docs/red_guide_bot_accounts/"
-              "#creating-a-new-bot-account")
-        print("and obtain your bot's token like described.")
+              "https://discordapp.com/developers/applications/me")
+        print("and obtain your bot's token")
 
     if not settings.login_credentials:
         print("\nInsert your bot's token:")
@@ -457,7 +455,7 @@ def interactive_setup(settings):
         settings.save_settings()
 
         print("\nThe configuration is done. Leave this window always open to"
-              " keep Jim online.\nAll commands will have to be issued through"
+              " keep Bob online.\nAll commands will have to be issued through"
               " Discord's chat, *this window will now be read only*.\n"
               "Press enter to continue")
         input("\n")
@@ -542,7 +540,7 @@ def load_cogs(bot):
     owner_cog = bot.get_cog('Owner')
     if owner_cog is None:
         print("The owner cog is missing. It contains core functions without "
-              "which Jim cannot function. Reinstall.")
+              "which Bob cannot function. Reinstall.")
         exit(1)
 
     if bot.settings._no_cogs:

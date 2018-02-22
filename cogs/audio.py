@@ -1288,7 +1288,7 @@ class Audio:
         """Reports info about the cache.
             - Current size of the cache.
             - Maximum cache size. User setting or minimum, whichever is higher.
-            - Minimum cache size. Automatically determined by number of servers Jim is running on.
+            - Minimum cache size. Automatically determined by number of servers Bob is running on.
         """
         await self.bot.say("Cache stats:\n"
                            "Current size: {:.2f} MB\n"
@@ -1944,7 +1944,7 @@ class Audio:
 
     @commands.command(pass_context=True, no_pm=True)
     async def sing(self, ctx):
-        """Makes Jim sing one of her songs"""
+        """Makes Bob sing one of his songs"""
         ids = ("zGTkAVsrfg8", "cGMWL8cOeAU", "vFrjMq4aL-g", "WROI5WYBU_A",
                "41tIUr_ex3g", "f9O2Rjn1azc")
         url = "https://www.youtube.com/watch?v={}".format(choice(ids))
@@ -2355,8 +2355,7 @@ def setup(bot):
             " bitness. They both must be either 32bit or 64bit.")
     elif opus is None:
         raise RuntimeError(
-            "You need to install ffmpeg and opus. See \"https://github.com/"
-            "Twentysix26/Red-DiscordBot/wiki/Requirements\"")
+            "You need to install ffmpeg and opus.)
 
     player = verify_ffmpeg_avconv()
 
@@ -2368,7 +2367,6 @@ def setup(bot):
         raise RuntimeError(
             "{}.\nConsult the guide for your operating system "
             "and do ALL the steps in order.\n"
-            "https://twentysix26.github.io/Red-Docs/\n"
             "".format(msg))
 
     n = Audio(bot, player=player)  # Praise 26

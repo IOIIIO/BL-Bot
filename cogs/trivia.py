@@ -35,7 +35,7 @@ class Trivia:
         server = ctx.message.server
         if ctx.invoked_subcommand is None:
             settings = self.settings[server.id]
-            msg = box("Jim gains points: {BOT_PLAYS}\n"
+            msg = box("Bob gains points: {BOT_PLAYS}\n"
                       "Seconds to answer: {DELAY}\n"
                       "Points to win: {MAX_SCORE}\n"
                       "Reveal answer on timeout: {REVEAL_ANSWER}\n"
@@ -67,7 +67,7 @@ class Trivia:
 
     @triviaset.command(pass_context=True)
     async def botplays(self, ctx):
-        """Jim gains points"""
+        """Bob gains points"""
         server = ctx.message.server
         if self.settings[server.id]["BOT_PLAYS"]:
             self.settings[server.id]["BOT_PLAYS"] = False

@@ -747,7 +747,7 @@ class Mod:
 
         Examples:
         cleanup user @\u200bTwentysix 2
-        cleanup user Jim 6"""
+        cleanup user Bob 6"""
 
         channel = ctx.message.channel
         author = ctx.message.author

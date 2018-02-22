@@ -19,10 +19,10 @@ NUM_THREADS = 4
 REPO_NONEX = 0x1
 REPO_CLONE = 0x2
 REPO_SAME = 0x4
-REPOS_LIST = "https://twentysix26.github.io/Red-Docs/red_cog_approved_repos/"
+REPOS_LIST = "cogs.red"
 WINDOWS_OS = os.name == 'nt'
 
-DISCLAIMER = ("You're about to add a 3rd party repository. The creator of Jim"
+DISCLAIMER = ("You're about to add a 3rd party repository. The creator of Bob"
               " and its community have no responsibility for any potential "
               "damage that the content of 3rd party repositories might cause."
               "\nBy typing 'I agree' you declare to have read and understand "
@@ -141,7 +141,7 @@ class Downloader:
         """Lists installable cogs
 
         Repositories list:
-        https://twentysix26.github.io/Red-Docs/red_cog_approved_repos/"""
+        cogs.red"""
         retlist = []
         if repo_name and repo_name in self.repos:
             msg = "Available cogs:\n"
@@ -595,7 +595,7 @@ class Downloader:
             if name not in self.repos:
                 raise UpdateError("Repo does not exist in data, wtf")
             folder = os.path.join(dd, name)
-            # Make sure we don't git reset the Red folder on accident
+            # Make sure we don't git reset the Bob folder on accident
             if not os.path.exists(os.path.join(folder, '.git')):
                 #if os.path.exists(folder):
                     #shutil.rmtree(folder)
