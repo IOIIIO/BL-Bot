@@ -837,10 +837,11 @@ class Owner:
     @commands.command()
     async def info(self):
         """Shows info about Bob"""
-        author_repo = "https://github.com/IOIIIO/BL-Bot"
+        author_repo = "https://github.com/IOIIIO"
         bob_repo = author_repo + "/BL-Bot"
         dpy_repo = "https://github.com/Rapptz/discord.py"
         python_url = "https://www.python.org/"
+        server_url = "hmm"
         since = datetime.datetime(2018, 2, 11, 0, 0)
         days_since = (datetime.datetime.utcnow() - since).days
         dpy_version = "[{}]({})".format(discord.__version__, dpy_repo)
@@ -862,7 +863,7 @@ class Owner:
         about = (
             "This is an instance of [Bob, a Discord bot made for the Bounce Lounge]({}) "
             "created by [NoOne]({}) and partially based on Red by [Twentysix] and many other bots. ~~Also a lot of Stack Overflow~~\n\n"
-            "".format(bob_repo, author_repo, server_url))
+            .format(bob_repo, author_repo, server_url))
 
         embed = discord.Embed(colour=discord.Colour.red())
         embed.add_field(name="Instance owned by", value=str(owner))

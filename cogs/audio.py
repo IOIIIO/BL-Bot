@@ -265,7 +265,7 @@ class Downloader(threading.Thread):
         except MaximumLength:
             self.hit_max_length.set()
         except OSError as e:
-            log.warning("~~An operating system error occurred while downloading URL~~ A happy little error occured'{}':\n'{}'".format(self.url, str(e)))
+            log.warning("An operating system error occurred while downloading URL '{}':\n'{}'".format(self.url, str(e)))
         self.done.set()
 
     def download(self):
@@ -2355,7 +2355,7 @@ def setup(bot):
             " bitness. They both must be either 32bit or 64bit.")
     elif opus is None:
         raise RuntimeError(
-            "You need to install ffmpeg and opus.)
+            "You need to install ffmpeg and opus.")
 
     player = verify_ffmpeg_avconv()
 
@@ -2367,6 +2367,7 @@ def setup(bot):
         raise RuntimeError(
             "{}.\nConsult the guide for your operating system "
             "and do ALL the steps in order.\n"
+            "https://twentysix26.github.io/Red-Docs/\n"
             "".format(msg))
 
     n = Audio(bot, player=player)  # Praise 26
