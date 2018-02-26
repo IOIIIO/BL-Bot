@@ -510,7 +510,7 @@ def main():
             print("WARNING: It doesn't look like Bob has been "
                   "installed with git.\nThis means that you won't "
                   "be able to update and some features won't be working.\n"
-                  "A reinstallation is recommended.)
+                  "A reinstallation is recommended.")
 
         if not has_git:
             print("WARNING: Git not found. This means that it's either not "
