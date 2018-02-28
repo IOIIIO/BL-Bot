@@ -900,7 +900,7 @@ class Owner:
 
     @commands.command(pass_context=True)
     @checks.is_owner()
-    async def traceback(self, ctx, public: bool=False):
+    async def traceback(self, ctx, public: bool=True):
         """Sends to the owner the last command exception that has occurred
 
         If public (yes is specified), it will be sent to the chat instead"""

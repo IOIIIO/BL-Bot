@@ -13,6 +13,10 @@ def is_owner_check(ctx):
     _id = ctx.message.author.id
     return _id == settings.owner or _id in ctx.bot.settings.co_owners
 
+def is_dev(ctx):
+    _id = ctx.message.author.id
+    return _id == settings.devs
+
 def is_owner():
     return commands.check(is_owner_check)
 
