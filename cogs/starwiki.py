@@ -44,12 +44,10 @@ class Wikia:
             img_stuff2 = img_stuff[1].split("?")
             img = img_stuff[0][:-1] + "?" + img_stuff2[1]
         except Exception as exc:
-            print(exc)
-            print(traceback.format_exc())
-            return message.Message("No result found for '{}'".format(search))
+            self.bot.say("No result found for '{}'".format(search))
 
         if len(section['content']) < 1:
-            return message.Message(body="No result found for '{}'".format(search))
+            self.bot.say("No result found for '{}'".format(search))
 
         embed = discord.Embed(color=discord.Color.green())
         embed.set_author(name="Visit the full page here",
