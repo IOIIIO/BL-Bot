@@ -17,8 +17,11 @@ class Starwiki:
         else:
             if query.startswith(" "):
                 query = query[1:]
-            await self.bot.say(embed=Wikia.wikia_get('starvstheforcesofevil', query))
-
+            result = Wikia.wikia_get('starvstheforcesofevil', query)
+            if result == None:
+                await self.bot.say("No result found for '{}'".format(query))
+            else:
+                await self.bot.say(embed=result)
 
 def setup(bot):
     bot.add_cog(Starwiki(bot))
@@ -44,10 +47,10 @@ class Wikia:
             img_stuff2 = img_stuff[1].split("?")
             img = img_stuff[0][:-1] + "?" + img_stuff2[1]
         except Exception as exc:
-            self.bot.say("No result found for '{}'".format(search))
+            return
 
         if len(section['content']) < 1:
-            self.bot.say("No result found for '{}'".format(search))
+            return
 
         embed = discord.Embed(color=discord.Color.green())
         embed.set_author(name="Visit the full page here",
