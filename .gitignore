@@ -4,5 +4,7 @@ __pycache__
 data
 !data/trivia/*
 !data/audio/playlists/*
+!data/insult/*
+!data/compliment/*
 *.exe
 *.dll
