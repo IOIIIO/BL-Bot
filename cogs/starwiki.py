@@ -2,6 +2,7 @@ import discord
 import random
 import urllib.request
 import json
+import time
 from discord.ext import commands
 
 class Starwiki:
@@ -23,6 +24,25 @@ class Starwiki:
             else:
                 await self.bot.say(embed=result)
 
+    @commands.command()
+    async def wikia(self, *, query: str):
+        if query == '':
+            await self.bot.say('Usage:\nwikia [wikia name] [search term]')
+            return
+
+        input_split = query.split(' ', 1)
+        print(input_split)
+
+        if len(input_split) != 2:
+            await self.bot.say('Usage:\nwikia [wikia name] [search term]')
+            return
+
+        result = Wikia.wikia_get(input_split[0], input_split[1])
+        if result == None:
+            await self.bot.say("No result found for '{}'".format(query))
+        else:
+            await self.bot.say(embed=result)
+
 def setup(bot):
     bot.add_cog(Starwiki(bot))
 
@@ -31,6 +51,7 @@ class Wikia:
 
     def wikia_get(wiki, search):
         '''Fetch and return data from Wikia'''
+        start = time.time()
         starwiki = Wikia(wiki)
         try:
             results = starwiki.wikia_search(search)
@@ -51,6 +72,7 @@ class Wikia:
 
         if len(section['content']) < 1:
             return
+        end = time.time()
 
         embed = discord.Embed(color=discord.Color.green())
         embed.set_author(name="Visit the full page here",
@@ -58,6 +80,7 @@ class Wikia:
                      icon_url='http://slot1.images.wikia.nocookie.net/__cb1493894030/common/skins/common/images/wiki.png')
         embed.add_field(name=section['title'], value=section['content'][0]['text'])
         embed.set_image(url=img)
+        embed.set_footer(text="Cached: no | search time: {}s".format((end - start)))
         return embed
 
     def __init__(self, wiki):
