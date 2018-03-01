@@ -157,6 +157,10 @@ class Settings:
         self.bot_settings["OWNER"] = value
 
     @property
+    def devs(self):
+        return self.bot_settings["DEVS"]
+
+    @property
     def token(self):
         return os.environ.get("RED_TOKEN", self.bot_settings["TOKEN"])
 

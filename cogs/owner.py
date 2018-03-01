@@ -899,7 +899,7 @@ class Owner:
                                "to send this")
 
     @commands.command(pass_context=True)
-    @checks.is_owner()
+    @checks.is_dev()
     async def traceback(self, ctx, public: bool=True):
         """Sends to the owner the last command exception that has occurred
 
