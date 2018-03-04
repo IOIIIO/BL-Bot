@@ -4,3 +4,4 @@ youtube_dl
 imgurpython
 psutil
 pillow
+beautifulsoup4
