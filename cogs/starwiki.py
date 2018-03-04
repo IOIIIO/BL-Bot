@@ -3,6 +3,7 @@ import random
 import urllib.request
 import json
 import time
+import traceback
 from discord.ext import commands
 
 class Starwiki:
@@ -49,39 +50,71 @@ def setup(bot):
 class Wikia:
     wiki_name = ""
 
+    cache = {}
+    query_cache = {}
+
     def wikia_get(wiki, search):
         '''Fetch and return data from Wikia'''
-        start = time.time()
+        current_milli_time = lambda: round(time.time() * 1000, 3)
+
+        search_start = current_milli_time()
         starwiki = Wikia(wiki)
+
+        title = ""
+        body = ""
+        url = ""
+        img = ""
+        cachelevel = 0
+
         try:
-            results = starwiki.wikia_search(search)
-            page = starwiki.wikia_getpage(results[0]['id'])
-            section = page[0]
+            if search in Wikia.query_cache:
+                results = Wikia.query_cache[search]
+                search_end = current_milli_time()
 
-            resultid = results[0]['id']
+                results.set_footer(text="Cache Level: {} | search time: {}ms".format(2, (search_end - search_start)))
+                return results
+            else:
+                results = starwiki.wikia_search(search)
+                page = starwiki.wikia_getpage(results[0]['id'])
+                section = page[0]
 
-            details = starwiki.wikia_getdetails(results[0]['id'])
+                resultid = results[0]['id']
+                if resultid in Wikia.cache:
+                    results = Wikia.cache[resultid]
+                    search_end = current_milli_time()
 
-            # Some really stupid hacks to get the main image
-            img_thumb = details[str(resultid)]['thumbnail']
-            img_stuff = img_thumb.split("window-crop", 1)
-            img_stuff2 = img_stuff[1].split("?")
-            img = img_stuff[0][:-1] + "?" + img_stuff2[1]
+                    results.set_footer(text="Cache Level: {} | search time: {}ms".format(1, (search_end - search_start)))
+                    return results
+                else:
+                    details = starwiki.wikia_getdetails(results[0]['id'])
+
+                    # Some really stupid hacks to get the main image
+                    img_thumb = details[str(resultid)]['thumbnail']
+                    img_stuff = img_thumb.split("window-crop", 1)
+                    img_stuff2 = img_stuff[1].split("?")
+
+                    img = img_stuff[0][:-1] + "?" + img_stuff2[1]
+                    url = results[0]['url']
+                    title = section['title']
+                    body = section['content'][0]['text']
+
+                    search_end = current_milli_time()
+
+                    embed = discord.Embed(color=discord.Color.green())
+                    embed.set_author(name="Visit the full page here",
+                         url=url,
+                         icon_url='http://slot1.images.wikia.nocookie.net/__cb1493894030/common/skins/common/images/wiki.png')
+                    embed.add_field(name=title, value=body)
+                    embed.set_image(url=img)
+                    embed.set_footer(text="Cache Level: {} | search time: {}ms".format(cachelevel, (search_end - search_start)))
+
+                    Wikia.cache[results[0]['id']] = embed
+                    Wikia.query_cache[search] = Wikia.cache[results[0]['id']]
+                    return embed
         except Exception as exc:
-            return
-
-        if len(section['content']) < 1:
-            return
-        end = time.time()
-
-        embed = discord.Embed(color=discord.Color.green())
-        embed.set_author(name="Visit the full page here",
-                     url=results[0]['url'],
-                     icon_url='http://slot1.images.wikia.nocookie.net/__cb1493894030/common/skins/common/images/wiki.png')
-        embed.add_field(name=section['title'], value=section['content'][0]['text'])
-        embed.set_image(url=img)
-        embed.set_footer(text="Cached: no | search time: {}s".format((end - start)))
-        return embed
+            print(exc)
+            print(traceback.format_exc())
+            return None
 
     def __init__(self, wiki):
         self.wiki_name = wiki
