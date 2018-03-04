@@ -32,7 +32,6 @@ class Starwiki:
             return
 
         input_split = query.split(' ', 1)
-        print(input_split)
 
         if len(input_split) != 2:
             await self.bot.say('Usage:\nwikia [wikia name] [search term]')
