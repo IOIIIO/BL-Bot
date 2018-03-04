@@ -53,7 +53,7 @@ class Owner:
         self.session.close()
 
     @commands.command()
-    @checks.is_owner()
+    @checks.is_dev()
     async def load(self, *, cog_name: str):
         """Loads a cog
 
@@ -82,7 +82,7 @@ class Owner:
             await self.bot.say("The cog has been loaded.")
 
     @commands.group(invoke_without_command=True)
-    @checks.is_owner()
+    @checks.is_dev()
     async def unload(self, *, cog_name: str):
         """Unloads a cog
 
