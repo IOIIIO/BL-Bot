@@ -105,7 +105,7 @@ class Settings:
         self._no_cogs = args.no_cogs
         self.debug = args.debug
         self._dry_run = args.dry_run
-        self.co_owners = args.co_owner
+        #self.co_owners = args.co_owner
 
         self.save_settings()
 
@@ -159,6 +159,10 @@ class Settings:
     @property
     def devs(self):
         return self.bot_settings["DEVS"]
+
+    @property
+    def co_owners(self):
+        self.bot_settings["CO"]
 
     @property
     def token(self):
