@@ -131,7 +131,7 @@ class Owner:
         else:
             await self.bot.say("All cogs are now unloaded.")
 
-    @checks.is_owner()
+    @checks.is_dev()
     @commands.command(name="reload")
     async def _reload(self, *, cog_name: str):
         """Reloads a cog
@@ -163,7 +163,7 @@ class Owner:
             await self.bot.say("The cog has been reloaded.")
 
     @commands.command(name="cogs")
-    @checks.is_owner()
+    @checks.is_dev()
     async def _show_cogs(self):
         """Shows loaded/unloaded cogs"""
         # This function assumes that all cogs are in the cogs folder,
