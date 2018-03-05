@@ -162,7 +162,7 @@ class Settings:
 
     @property
     def co_owners(self):
-        self.bot_settings["CO"]
+        return self.bot_settings["CO"]
 
     @property
     def token(self):
