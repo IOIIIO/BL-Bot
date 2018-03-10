@@ -13,7 +13,7 @@ import sys
 
 DIR_DATA = "data/oboobs"
 SETTINGS = DIR_DATA+"/settings.json"
-DEFAULT = {"nsfw_channels": ["133251234164375552"], "invert" : False, "nsfw_msg": True, "last_update": 0,  "ama_boobs": 10548, "ama_ass": 4542}# Red's testing chan. nsfw content off by default.
+DEFAULT = {"nsfw_channels": ["12312312312312312313"], "invert" : False, "nsfw_msg": True, "last_update": 0,  "ama_boobs": 10548, "ama_ass": 4542}
 
 
 class oboobs:
