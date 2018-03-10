@@ -17,6 +17,13 @@ def is_dev_check(ctx):
     _id = ctx.message.author.id
     return _id == settings.owner or _id in ctx.bot.settings.co_owners or _id in ctx.bot.settings.devs
 
+def is_co_check(ctx):
+    _id = ctx.message.author.id
+    return _id in ctx.bot.settings.co_owners or _id in ctx.bot.settings.devs
+
+def is_co():
+    return commands.check(is_co_check)
+
 def is_dev():
     return commands.check(is_dev_check)
 

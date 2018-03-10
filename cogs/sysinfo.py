@@ -29,7 +29,7 @@ class SysInfo:
             await self.bot.send_cmd_help(ctx)
 
     @sysinfo.command(pass_context=True)
-    @checks.is_owner()
+    @checks.is_co()
     async def info(self, ctx, *args: str):
         """Summary of cpu, memory, disk and network information
          Usage: info [option]
@@ -133,7 +133,7 @@ class SysInfo:
         return
 
     @sysinfo.command(pass_context=True)
-    @checks.is_owner()
+    @checks.is_co()
     async def df(self, ctx):
         """File system disk space usage"""
 
@@ -164,7 +164,7 @@ class SysInfo:
         return
 
     @sysinfo.command(pass_context=True)
-    @checks.is_owner()
+    @checks.is_co()
     async def free(self, ctx):
         """Amount of free and used memory in the system"""
 
@@ -312,7 +312,7 @@ class SysInfo:
         return
 
     @sysinfo.command(pass_context=True)
-    @checks.is_owner()
+    @checks.is_co()
     async def meminfo(self, ctx):
         """System memory information"""
 
@@ -420,7 +420,7 @@ class SysInfo:
         return
 
     @sysinfo.command(pass_context=True)
-    @checks.is_owner()
+    @checks.is_co()
     async def smem(self, ctx):
         """Physical memory usage, taking shared memory pages into account"""
 
@@ -554,7 +554,7 @@ class SysInfo:
         return
 
     @sysinfo.command(pass_context=True)
-    @checks.is_owner()
+    @checks.is_co()
     async def top(self, ctx):
         """Snapshot of real-time system information and tasks"""
 

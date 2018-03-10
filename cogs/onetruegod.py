@@ -4,6 +4,7 @@ import random
 
 
 class OneTrueGod:
+    """Shows an image of the one true god"""
     def __init__(self, bot):
         self.bot = bot
         self.placecage = "https://www.placecage.com/"

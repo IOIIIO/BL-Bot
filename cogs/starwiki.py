@@ -47,6 +47,7 @@ def setup(bot):
     bot.add_cog(Starwiki(bot))
 
 class Wikia:
+    """Get a page from any wikia"""
     wiki_name = ""
 
     cache = {}

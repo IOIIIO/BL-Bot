@@ -7,6 +7,7 @@ import os
 import re
 
 class Star:
+    """Remind the chat how dead it is"""
 
     def __init__(self, bot):
         self.bot = bot

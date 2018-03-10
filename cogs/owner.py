@@ -109,7 +109,7 @@ class Owner:
             await self.bot.say("The cog has been unloaded.")
 
     @unload.command(name="all")
-    @checks.is_owner()
+    @checks.is_co()
     async def unload_all(self):
         """Unloads all cogs"""
         cogs = self._list_cogs()
@@ -189,7 +189,7 @@ class Owner:
             await self.bot.say(box(page.lstrip(" "), lang="diff"))
 
     @commands.command(pass_context=True, hidden=True)
-    @checks.is_owner()
+    @checks.is_dev()
     async def debug(self, ctx, *, code):
         """Evaluates code"""
         def check(m):
@@ -288,7 +288,7 @@ class Owner:
         t.start()
 
     @_set.command()
-    @checks.is_owner()
+    @checks.is_co()
     async def defaultmodrole(self, *, role_name: str):
         """Sets the default mod role name
 
@@ -298,7 +298,7 @@ class Owner:
         await self.bot.say("The default mod role name has been set.")
 
     @_set.command()
-    @checks.is_owner()
+    @checks.is_co()
     async def defaultadminrole(self, *, role_name: str):
         """Sets the default admin role name
 
@@ -361,7 +361,7 @@ class Owner:
                            "".format(p, prefixes[0]))
 
     @_set.command(pass_context=True)
-    @checks.is_owner()
+    @checks.is_co()
     async def name(self, ctx, *, name):
         """Sets Bob's name"""
         name = name.strip()
@@ -381,7 +381,7 @@ class Owner:
             await self.bot.send_cmd_help(ctx)
 
     @_set.command(pass_context=True, no_pm=True)
-    @checks.is_owner()
+    @checks.is_co()
     async def nickname(self, ctx, *, nickname=""):
         """Sets Bob's nickname
 
@@ -479,7 +479,7 @@ class Owner:
         await self.bot.say("Done.")
 
     @_set.command()
-    @checks.is_owner()
+    @checks.is_co()
     async def avatar(self, url):
         """Sets Bob's avatar"""
         try:
@@ -527,7 +527,7 @@ class Owner:
         await self.bot.say("Mod role set to '{}'".format(role.name))
 
     @commands.group(pass_context=True)
-    @checks.is_owner()
+    @checks.is_co()
     async def blacklist(self, ctx):
         """Blacklist management commands
 
@@ -639,7 +639,7 @@ class Owner:
         await self.bot.shutdown()
 
     @commands.command()
-    @checks.is_owner()
+    @checks.is_co()
     async def restart(self, silently : bool=False):
         """Attempts to restart Bob
 
@@ -654,7 +654,7 @@ class Owner:
         await self.bot.shutdown(restart=True)
 
     @commands.group(name="command", pass_context=True)
-    @checks.is_owner()
+    @checks.is_co()
     async def command_disabler(self, ctx):
         """Disables/enables commands
 
@@ -725,7 +725,6 @@ class Owner:
                 pass
 
     @commands.command()
-    @checks.is_owner()
     async def join(self):
         """Shows Bob's invite URL"""
         if self.bot.user.bot:
