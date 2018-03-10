@@ -7,7 +7,7 @@ import os
 import re
 
 class Star:
-    """Remind the chat how dead it is"""
+    """Quote board"""
 
     def __init__(self, bot):
         self.bot = bot
@@ -274,11 +274,20 @@ class Star:
                 if "author" in embed:
                     postauthor = embed["author"]
                     if "icon_url" in postauthor:
-                        em.set_author(name=postauthor["name"], icon_url=postauthor["icon_url"])
+                        if author.nick != None:
+                            em.set_author(name=author.nick, icon_url=author.avatar_url)
+                        else:
+                            em.set_author(name=author.name, icon_url=author.avatar_url)
                     else:
-                        em.set_author(name=postauthor["name"])
+                        if author.nick != None:
+                            em.set_author(name=author.nick)
+                        else:
+                            em.set_author(name=author.name)
                 if "author" not in embed:
-                    em.set_author(name=author.name, icon_url=author.avatar_url)
+                    if author.nick != None:
+                        em.set_author(name=author.nick, icon_url=author.avatar_url)
+                    else:
+                        em.set_author(name=author.name, icon_url=author.avatar_url)
                 if "color" in embed:
                     em.color = embed["color"]
                 if "color" not in embed:
@@ -302,7 +311,10 @@ class Star:
                 em = discord.Embed(timestamp=reaction.message.timestamp)
                 em.color = author.top_role.color
                 em.description = msg.content
-                em.set_author(name=author.name, icon_url=author.avatar_url)
+                if author.nick != None:
+                    em.set_author(name=author.nick, icon_url=author.avatar_url)
+                else:
+                    em.set_author(name=author.name, icon_url=author.avatar_url)
                 if reaction.message.attachments != []:
                     em.set_image(url=reaction.message.attachments[0]["url"])
             em.set_footer(text='{} | {}'.format(channel.server.name, channel.name))
