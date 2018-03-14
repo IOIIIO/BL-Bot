@@ -7,7 +7,7 @@ import os
 
 class Insult:
 
-    """Airenkun's Insult Cog"""
+    """Insult Cog"""
     def __init__(self, bot):
         self.bot = bot
         self.insults = fileIO("data/insult/insults.json","load")

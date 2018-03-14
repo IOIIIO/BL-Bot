@@ -378,7 +378,7 @@ class Mod:
                                 reason=reason)
             await self.bot.say("Done. It was about time.")
         except discord.errors.Forbidden:
-            await self.bot.say("I'm not allowed to do that.")
+            await self.bot.say("I'm not allowed to do that, Dave.")
         except Exception as e:
             print(e)
 
