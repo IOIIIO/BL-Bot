@@ -11,15 +11,19 @@ from __main__ import settings
 
 def is_owner_check(ctx):
     _id = ctx.message.author.id
+    return _id == settings.owner
+
+def is_co_check(ctx):
+    _id = ctx.message.author.id
     return _id == settings.owner or _id in ctx.bot.settings.co_owners
 
 def is_dev_check(ctx):
     _id = ctx.message.author.id
     return _id == settings.owner or _id in ctx.bot.settings.co_owners or _id in ctx.bot.settings.devs
 
-def is_co_check(ctx):
+def is_marie_check(ctx):
     _id = ctx.message.author.id
-    return _id in ctx.bot.settings.co_owners or _id in ctx.bot.settings.devs
+    return _id == settings.owner or _id in ctx.bot.settings.co_owners or _id == ctx.bot.settings.marie
 
 def is_co():
     return commands.check(is_co_check)
@@ -29,6 +33,9 @@ def is_dev():
 
 def is_owner():
     return commands.check(is_owner_check)
+
+def is_marie():
+    return commands.check(is_marie_check)
 
 # The permission system of the bot is based on a "just works" basis
 # You have permissions and the bot has permissions. If you meet the permissions

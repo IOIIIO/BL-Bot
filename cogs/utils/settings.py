@@ -165,6 +165,10 @@ class Settings:
         return self.bot_settings["CO"]
 
     @property
+    def marie(self):
+        return self.bot_settings["MA"]
+
+    @property
     def token(self):
         return os.environ.get("RED_TOKEN", self.bot_settings["TOKEN"])
 
