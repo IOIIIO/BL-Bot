@@ -15,11 +15,9 @@ The default set of modules includes and is not limited to:
 * Imgur/gif search
 
 Additionally, other modules (cogs) can be easily found and added from a growing community of cog repositories. Including:
-* Cleverbot integration (talk to Bob and he talks back)
 * Loggers
 * Welcome messages setup
 * Reminders
-* Raffles
 * Leveler (increase levels for server participation)
 * Sound effects
 * And much, much more!
