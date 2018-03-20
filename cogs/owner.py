@@ -381,7 +381,7 @@ class Owner:
             await self.bot.send_cmd_help(ctx)
 
     @_set.command(pass_context=True, no_pm=True)
-    @checks.is_co()
+    @checks.is_marie()
     async def nickname(self, ctx, *, nickname=""):
         """Sets Bob's nickname
 
