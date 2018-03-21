@@ -32,23 +32,13 @@ class oboobs:
             return
 
     # Boobs
-    @commands.command(pass_context=True, no_pm=False)
+    @channels.is_nsfw()
+    @commands.command(pass_context=True, no_pm=False)    
     async def boobs(self, ctx):
         """Shows some boobs."""
         author = ctx.message.author
-        dis_nsfw = None
-        for a in self.settings["nsfw_channels"]:
-            if a == ctx.message.channel.id:
-                if self.settings["invert"]:
-                    dis_nsfw = False
-                else:
-                    dis_nsfw = True
-                break
-        if dis_nsfw is None and not self.settings["invert"]:
-            dis_nsfw = False
-        else:
-            dis_nsfw = True
-
+        dis_nsfw = True
+        
         try:
             rdm = random.randint(0, self.settings["ama_boobs"])
             search = ("http://api.oboobs.ru/boobs/{}".format(rdm))
@@ -72,17 +62,11 @@ class oboobs:
         """Shows some ass."""
         author = ctx.message.author
         dis_nsfw = None
-        for a in self.settings["nsfw_channels"]:
-            if a == ctx.message.channel.id:
-                if self.settings["invert"]:
-                    dis_nsfw = False
-                else:
-                    dis_nsfw = True
-                break
-        if dis_nsfw is None and not self.settings["invert"]:
-            dis_nsfw = False
-        else:
+
+        if ctx.message.channel.is_nsfw():
             dis_nsfw = True
+        else:
+            dis_nsfw = False
 
         try:
             rdm = random.randint(0, self.settings["ama_ass"])

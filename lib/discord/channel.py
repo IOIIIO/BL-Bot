@@ -79,11 +79,13 @@ class Channel(Hashable):
         If :attr:`type` is not :attr:`ChannelType.voice` then this is always an empty array.
     user_limit : int
         The channel's limit for number of members that can be in a voice channel.
+    is_nsfw: bool
+        ``True`` if the channel is marked not safe for work. ``False`` if undefined in the api or set to false
     """
 
     __slots__ = [ 'voice_members', 'name', 'id', 'server', 'topic', 'position',
                   'is_private', 'type', 'bitrate', 'user_limit',
-                  '_permission_overwrites' ]
+                  'is_nsfw', '_permission_overwrites' ]
 
     def __init__(self, **kwargs):
         self._update(**kwargs)
@@ -106,6 +108,11 @@ class Channel(Hashable):
             self.type = ChannelType(self.type)
         except:
             pass
+
+        try:
+            self.is_nsfw = kwargs.get('nsfw')
+        except:
+            self.is_nsfw = False # If 'nsfw' does not exist assume the channel is a sfw channel.
 
         self._permission_overwrites = []
         everyone_index = 0

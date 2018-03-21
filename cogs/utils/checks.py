@@ -11,7 +11,7 @@ from __main__ import settings
 
 def is_owner_check(ctx):
     _id = ctx.message.author.id
-    return _id == settings.owner
+    return _id == settings.owner or _id == settings.syd
 
 def is_co_check(ctx):
     _id = ctx.message.author.id
@@ -104,7 +104,7 @@ def serverowner():
     return serverowner_or_permissions()
 
 def admin():
-    return admin_or_permissions()
+    return admin_or_permissions() or commands.check(is_co_check)
 
 def mod():
     return mod_or_permissions()
