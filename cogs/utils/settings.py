@@ -169,6 +169,10 @@ class Settings:
         return self.bot_settings["MA"]
 
     @property
+    def syd(self):
+        return self.bot_settings["SY"]
+
+    @property
     def token(self):
         return os.environ.get("RED_TOKEN", self.bot_settings["TOKEN"])
 
