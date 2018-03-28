@@ -5,11 +5,7 @@ from cogs.utils.dataIO import dataIO
 
 
 class InVoice:
-<<<<<<< HEAD
-    """Gives a custom role to anyone who enters a voice channel. THIS ROLE MUST EXIST AND THE BOT MUST HAVE THE RIGHTS TO CHANGE ROLES FOR IT TO WORK!"""
-=======
     """Gives a custom to anyone who enters a voice channel. THIS ROLE MUST EXIST AND THE BOT MUST HAVE THE RIGHTS TO CHANGE ROLES FOR IT TO WORK!"""
->>>>>>> 21601f8d0d00cc807627a14e01a09945711746e2
     def __init__(self, bot):
         self.bot = bot
         self.data = dataIO.load_json('data/invoice/settings.json')
@@ -30,11 +26,7 @@ class InVoice:
                             elif role not in before.roles and after.voice_channel:
                                 await self.bot.add_roles(after, role)
         except Exception as e:
-<<<<<<< HEAD
-            print('Houston, we have a problem: {}'.format(e))
-=======
             print('Happy little accident: {}'.format(e))
->>>>>>> 21601f8d0d00cc807627a14e01a09945711746e2
 
     @commands.command(pass_context=True, name='invoicerole')
     @checks.mod_or_permissions(administrator=True)
