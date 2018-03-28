@@ -157,24 +157,6 @@ class General:
         search_terms = escape_mass_mentions(search_terms.replace(" ", "+"))
         await self.bot.say("https://lmgtfy.com/?q={}".format(search_terms))
 
-    @commands.command(no_pm=True, hidden=True)
-    async def hug(self, user : discord.Member, intensity : int=1):
-        """Because everyone likes hugs
-
-        Up to 10 intensity levels."""
-        name = italics(user.display_name)
-        if intensity <= 0:
-            msg = "(っ˘̩╭╮˘̩)っ" + name
-        elif intensity <= 3:
-            msg = "(っ´▽｀)っ" + name
-        elif intensity <= 6:
-            msg = "╰(*´︶`*)╯" + name
-        elif intensity <= 9:
-            msg = "(つ≧▽≦)つ" + name
-        elif intensity >= 10:
-            msg = "(づ￣ ³￣)づ{} ⊂(´・ω・｀⊂)".format(name)
-        await self.bot.say(msg)
-
     @commands.command(pass_context=True, no_pm=True)
     async def userinfo(self, ctx, *, user: discord.Member=None):
         """Shows users's informations"""

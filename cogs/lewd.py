@@ -5,7 +5,7 @@ from discord.ext import commands
 from cogs.utils.dataIO import dataIO
 
 
-class Hand:
+class Lewd:
     def __init__(self, bot):
         self.bot = bot
 
@@ -30,6 +30,24 @@ class Hand:
             message = str(random.choice(self.hold_person)).format(victim=victim.display_name, holder=author.display_name)
         await self.bot.say(message)
 
+    @commands.command(no_pm=True, hidden=True)
+    async def hug(self, user : discord.Member, intensity : int=1):
+        """Because everyone likes hugs
+
+        Up to 10 intensity levels."""
+        name = italics(user.display_name)
+        if intensity <= 0:
+            msg = "(っ˘̩╭╮˘̩)っ" + name
+        elif intensity <= 3:
+            msg = "(っ´▽｀)っ" + name
+        elif intensity <= 6:
+            msg = "╰(*´︶`*)╯" + name
+        elif intensity <= 9:
+            msg = "(つ≧▽≦)つ" + name
+        elif intensity >= 10:
+            msg = "(づ￣ ³￣)づ{} ⊂(´・ω・｀⊂)".format(name)
+        await self.bot.say(msg)
+
 
 def setup(bot):
-    bot.add_cog(Hand(bot))
+    bot.add_cog(Lewd(bot))
