@@ -3,6 +3,9 @@ import random
 import discord
 from discord.ext import commands
 from cogs.utils.dataIO import dataIO
+from .utils.dataIO import fileIO
+from random import choice as randchoice
+from .utils.chat_formatting import italics
 
 
 class Lewd:
@@ -19,9 +22,11 @@ class Lewd:
         self.hold_person.append('*{holder}* looks *{victim}* in the eyes and grabs their hand.')
         self.hold_person.append('*{holder}* accidentally touches *{victim}\'s* hand, they like it.')
         self.hold_person.append('A spider drops, *{holder}* grabs *{victim}\'s* hand in angst.')
+        self.cuddles = fileIO("data/lewd/cuddles.json","load")
 
-    @commands.command(pass_context=True, no_pm=False, name='handhold')
-    async def _eat(self, context, victim: discord.Member):
+
+    @commands.command(pass_context=True, no_pm=False)
+    async def handhold(self, context, victim: discord.Member):
         """Hold another users hand."""
         author = context.message.author
         if victim.id == author.id:
@@ -29,6 +34,20 @@ class Lewd:
         else:
             message = str(random.choice(self.hold_person)).format(victim=victim.display_name, holder=author.display_name)
         await self.bot.say(message)
+
+    @commands.command(pass_context=True, no_pm=False)
+    async def cuddle(self, ctx, user : discord.Member=None):
+        """Cuddles the user. Messages brought to you by @Mandelora#1108"""
+        msg = ' '
+        if user != None:
+            if user.id == self.bot.user.id:
+                user = ctx.message.author
+                msg = " You try to cuddle the bot but end up hugging a metal box."
+                await self.bot.say(user.mention + msg)
+            else:
+                await self.bot.say(randchoice(self.cuddles).format(victim=user.display_name, cuddler=ctx.message.author.display_name))
+        else:
+            await self.bot.say(randchoice(self.cuddles).format(victim=user.display_name, cuddler=ctx.message.author.display_name))
 
     @commands.command(no_pm=True, hidden=True)
     async def hug(self, user : discord.Member, intensity : int=1):
