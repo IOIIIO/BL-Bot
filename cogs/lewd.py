@@ -13,7 +13,7 @@ class Lewd:
         self.bot = bot
 
         self.hold_self = []
-        self.hold_self.append('*{holder}* looks in the mirror and grabs his their own hand.')
+        self.hold_self.append('*{holder}* looks in the mirror and grabs their own hand.')
         self.hold_self.append('*{holder}* feels lonely and wonders what it\'s like to be held by your hand.')
         self.hold_self.append('*{holder}* holds their hands together.')
         
@@ -23,6 +23,9 @@ class Lewd:
         self.hold_person.append('*{holder}* accidentally touches *{victim}\'s* hand, they like it.')
         self.hold_person.append('A spider drops, *{holder}* grabs *{victim}\'s* hand in angst.')
         self.cuddles = fileIO("data/lewd/cuddles.json","load")
+        self.hold_self = fileIO("data/lewd/self.json","load")
+        self.hold_person = fileIO("data/lewd/person.json","load")
+        self.hold_nothing = fileIO("data/lewd/nothing.json","load")
 
 
     @commands.command(pass_context=True, no_pm=False)
@@ -46,8 +49,11 @@ class Lewd:
                 await self.bot.say(user.mention + msg)
             else:
                 await self.bot.say(randchoice(self.cuddles).format(victim=user.display_name, cuddler=ctx.message.author.display_name))
+        elif user is None:
+            await self.bot.say("You try to cuddle with air.")
         else:
             await self.bot.say(randchoice(self.cuddles).format(victim=user.display_name, cuddler=ctx.message.author.display_name))
+        
 
     @commands.command(no_pm=True, hidden=True)
     async def hug(self, user : discord.Member, intensity : int=1):
