@@ -50,7 +50,7 @@ class Eat:
             message = str(random.choice(self.eat_bot))
         elif victim.id != "" and victim.id != author.id and victim.id != self.bot.user.id:
             message = str(random.choice(self.eat_person)).format(victim=victim.display_name)
-        await self.bot.say(italics(context.message.author.display_name)+ ' ' + message)
+        await self.bot.say(italics(context.message.author.display_name)+ ', ' + message)
 
 
 def setup(bot):
