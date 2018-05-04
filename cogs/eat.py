@@ -3,11 +3,13 @@ import random
 import discord
 from discord.ext import commands
 from cogs.utils.dataIO import dataIO
+from .utils.chat_formatting import italics
 
 
 class Eat:
     def __init__(self, bot):
         self.bot = bot
+        #self.user = ctx.message.author
 
         self.eat_nothing = []
         self.eat_nothing.append('you sit quietly and eat *nothing*...')
@@ -48,7 +50,7 @@ class Eat:
             message = str(random.choice(self.eat_bot))
         elif victim.id != "" and victim.id != author.id and victim.id != self.bot.user.id:
             message = str(random.choice(self.eat_person)).format(victim=victim.display_name)
-        await self.bot.say(message)
+        await self.bot.say(italics(context.message.author.display_name)+ ', ' + message)
 
 
 def setup(bot):
