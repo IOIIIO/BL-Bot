@@ -69,6 +69,33 @@ class Lewd:
             msg = "(づ￣ ³￣)づ{} ⊂(´・ω・｀⊂)".format(name)
         await self.bot.say(msg)
 
+    @commands.command()
+    async def gay(self, *, user : discord.Member):
+        """Detects how gay a person is
+
+        This is 100% accurate."""
+        state = random.getstate()
+        random.seed(user.id)
+        percent = random.randint(0, 100)
+        if percent == 0:
+            amount = "not at all"
+        elif percent < 10:
+            amount = "barely"
+        elif percent < 26:
+            amount = "kinda"
+        elif percent < 51:
+            amount = "half"
+        elif percent < 76:
+            amount = "pretty"
+        elif percent < 91:
+            amount = "hella"
+        elif percent < 101:
+            amount = "totally"
+        message = """*{gay}* is {cent}% gay
+That is {how} gay.""".format(gay=user.display_name, cent=percent, how=amount)
+        random.setstate(state)
+        await self.bot.say(message)
+
 def checks():
     if not os.path.exists('data/lewd'):
         print('Creating data/lewd folder...')
