@@ -14,7 +14,7 @@ class Say:
         self.settings = dataIO.load_json('data/say/settings.json')
 
     @commands.group(pass_context=True)
-    @checks.is_marie()
+    @checks.marie_or_permissions(administrator=True)
     async def send(self, ctx): 
         if ctx.invoked_subcommand is None:
             pages = self.bot.formatter.format_help_for(ctx, ctx.command)

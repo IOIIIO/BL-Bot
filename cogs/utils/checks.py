@@ -36,7 +36,7 @@ def is_owner():
 
 def is_marie():
     return commands.check(is_marie_check)
-
+    return role_or_permissions(administrator=True)
 # The permission system of the bot is based on a "just works" basis
 # You have permissions and the bot has permissions. If you meet the permissions
 # required to execute the command (and the bot does as well) then it goes through
@@ -45,8 +45,7 @@ def is_marie():
 # A role with the name of Bot Mod and a role with the name of Bot Admin.
 # Having these roles provides you access to certain commands without actually having
 # the permissions required for them.
-# Of course, the owner will always be able to execute commands.
-
+# Of course, the owner will always be able to execute commands. 
 def check_permissions(ctx, perms):
     if is_owner_check(ctx):
         return True
@@ -84,6 +83,14 @@ def admin_or_permissions(**perms):
         server = ctx.message.server
         admin_role = settings.get_server_admin(server)
         return role_or_permissions(ctx, lambda r: r.name.lower() == admin_role.lower(), **perms)
+
+    return commands.check(predicate)
+
+def marie_or_permissions(**perms):
+    def predicate(ctx):
+        server = ctx.message.server
+        admin_role = settings.get_server_admin(server)
+        return role_or_permissions(ctx, lambda r: r.name.lower() == "MARIEBOTROLEDONOTTOUCH".lower(), **perms)
 
     return commands.check(predicate)
 
