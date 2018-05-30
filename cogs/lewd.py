@@ -12,6 +12,7 @@ class Lewd:
     def __init__(self, bot):
         self.bot = bot
         self.cuddles = fileIO("data/lewd/cuddles.json","load")
+        self.kisses = fileIO("data/lewd/kiss.json", "load")
         self.hold_self = fileIO("data/lewd/hand/self.json","load")
         self.hold_person = fileIO("data/lewd/hand/person.json","load")
         self.hold_nothing = fileIO("data/lewd/hand/nothing.json","load")
@@ -49,6 +50,22 @@ class Lewd:
             await self.bot.say("You try to cuddle with air.")
         else:
             await self.bot.say(randchoice(self.cuddles).format(victim=user.display_name, cuddler=ctx.message.author.display_name))
+
+    @commands.command(pass_context=True, no_pm=False)
+    async def kiss(self, ctx, user : discord.Member=None):
+        """Kiss the user."""
+        msg = ' '
+        if user != None:
+            if user.id == self.bot.user.id:
+                user = ctx.message.author
+                msg = " You give a nice kiss to a metal box in some kid's room."
+                await self.bot.say(user.mention + msg)
+            else:
+                await self.bot.say(randchoice(self.kisses).format(victim=user.display_name, kisser=ctx.message.author.display_name))
+        elif user is None:
+            await self.bot.say("You try to kiss the air.")
+        else:
+            await self.bot.say(randchoice(self.kisses).format(victim=user.display_name, kisser=ctx.message.author.display_name))
         
 
     @commands.command(no_pm=True, hidden=True)
@@ -83,6 +100,8 @@ class Lewd:
             amount = "barely"
         elif percent < 26:
             amount = "kinda"
+        elif percent < 41:
+            amount = "somewhat"
         elif percent < 51:
             amount = "half"
         elif percent < 76:
@@ -95,6 +114,7 @@ class Lewd:
 That is {how} gay.""".format(gay=user.display_name, cent=percent, how=amount)
         random.setstate(state)
         await self.bot.say(message)
+
 
 def checks():
     if not os.path.exists('data/lewd'):
