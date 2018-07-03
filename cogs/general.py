@@ -49,6 +49,16 @@ class General:
         """Pong."""
         await self.bot.say("Pong.")
 
+    #@commands.command(pass_context=True)
+    #async def avatar(self, context, user : discord.Member):
+    #    """Shows an users avatar."""
+    #    if user != None:
+    #        message = context.message.discord.Member.avatar_url
+    #    else:
+    #        message = context.message.author.avatar_url
+    #    await self.bot.say(message)
+            
+
     @commands.command()
     async def choose(self, *choices):
         """Chooses between multiple choices.
