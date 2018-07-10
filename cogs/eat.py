@@ -38,19 +38,29 @@ class Eat:
         self.eat_person.append('your jaw clamps down on *{victim}* - a satisfying *crunch* emanates as you finish your newest meal.')
 
     @commands.command(pass_context=True, no_pm=False, name='eat')
-    async def _eat(self, context, victim: discord.Member):
+    async def _eat(self, context, victim):
         """Randomly chooses a way to eat."""
         server = context.message.server
         author = context.message.author
-        if victim.id == "":
+        if victim == discord.Member:
+            if victim.id == author.id:
+                message = str(random.choice(self.eat_self))
+            elif victim.id == self.bot.user.id:
+                message = str(random.choice(self.eat_bot))
+            elif victim.id != author.id and victim.id != self.bot.user.id:
+                message = str(random.choice(self.eat_person)).format(victim=victim.display_name)
+            await self.bot.say(italics(context.message.author.display_name)+ ', ' + message)
+        elif victim == None:
             message = str(random.choice(self.eat_nothing))
-        elif victim.id == author.id:
-            message = str(random.choice(self.eat_self))
-        elif victim.id == self.bot.user.id:
-            message = str(random.choice(self.eat_bot))
-        elif victim.id != "" and victim.id != author.id and victim.id != self.bot.user.id:
-            message = str(random.choice(self.eat_person)).format(victim=victim.display_name)
-        await self.bot.say(italics(context.message.author.display_name)+ ', ' + message)
+            await self.bot.say(italics(context.message.author.display_name)+ ', ' + message)
+        elif "@everyone" in victim or "@here" in victim:
+            await self.bot.say("Nice try funny guy")
+        else:
+            message = str(random.choice(self.eat_person)).format(victim=victim)
+            await self.bot.say(italics(context.message.author.display_name)+ ', ' + message)
+
+        
+
 
 
 def setup(bot):
