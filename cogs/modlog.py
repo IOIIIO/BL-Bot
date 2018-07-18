@@ -39,6 +39,7 @@ class ModLog:
                 e.add_field(name="Leave", value=str(db[ctx.message.server.id]['toggleleave']))
                 e.add_field(name="Channel", value=str(db[ctx.message.server.id]['togglechannel']))
                 e.add_field(name="Server", value=str(db[ctx.message.server.id]['toggleserver']))
+                e.add_field(name="Errata", value=str(db[ctx.message.server.id]['errata']))
                 e.set_thumbnail(url=server.icon_url)
                 await self.bot.say(embed=e)
             except KeyError:
@@ -236,6 +237,21 @@ class ModLog:
             fileIO(self.direct, "save", db)
             await self.bot.say("Ban messages disabled")
 
+    @modlogtoggles.command(pass_context=True, no_pm=True)
+    async def exclude(self, ctx, name : str):
+        """Toggle channels which should not be logged"""
+        server = ctx.message.server
+        db = fileIO(self.direct, "load")
+        if name in db[server.id]["errata"]:
+            db[server.id]["errata"].remove(name)
+            fileIO(self.direct, "save", db)
+            await self.bot.say("Channel removed from the list")
+        elif name not in db[server.id]["errata"]:
+            db[server.id]["errata"].append(name)
+            fileIO(self.direct, "save", db)
+            await self.bot.say("Channel added to the list")    
+
+
     async def on_message_delete(self, message):
         server = message.server
         db = fileIO(self.direct, "load")
@@ -243,8 +259,10 @@ class ModLog:
             return
         if db[server.id]['toggledelete'] == False:
             return
-        if message.author is message.author.bot:
-            pass
+        #if message.author is message.author.bot:
+        #    pass
+        if message.channel.id in db[server.id]['errata']:
+            return
         channel = db[server.id]["Channel"]
         time = datetime.datetime.now()
         cleanmsg = message.content
