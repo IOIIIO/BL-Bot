@@ -488,6 +488,8 @@ class ModLog:
             return
         if db[server.id]['toggleedit'] == False:
             return
+        if before.channel.id in db[server.id]['errata']:
+            return
         if before.content == after.content:
             return
         if before.author.bot:
