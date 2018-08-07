@@ -104,8 +104,9 @@ class Lewd:
             channel = ctx.message.channel
             msg = 'data/lewd/hugs/{}.gif'.format(num)
             msg2 = "*{hugger}* pulls *{hugged}* in for a hug.".format(hugger=ctx.message.author.display_name, hugged=user.display_name)
-            await self.bot.say(msg2)
             await self.bot.send_file(channel, msg)
+            await self.bot.say(msg2)
+            
 
         else:
             name = italics(user.display_name)
