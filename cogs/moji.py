@@ -26,6 +26,7 @@ class Moji:
     @commands.command(pass_context=True, no_pm=True)
     async def emoji(self, ctx, name: str):
         """Send a large custom emoji.
+
         Bot must be in the server with the emoji"""
         for x in list(self.bot.get_all_emojis()):
             if x.name.lower() == name.lower():
@@ -46,7 +47,7 @@ class Moji:
                 im.save(fp, "PNG")
 
 # You can uncomment this line if you want c:
-                await self.bot.delete_message(ctx.message)
+                #await self.bot.delete_message(ctx.message)
                 return await self.bot.send_file(ctx.message.channel, fp)
 
     @commands.group(pass_context=True, no_pm=True)

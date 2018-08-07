@@ -623,7 +623,7 @@ class ModLog:
         fmt = '%H:%M:%S'
         if not before.roles == after.roles:
             if db[server.id]["embed"] == True:
-                name = member
+                name = before
                 name = " ~ ".join((name.name, name.nick)) if name.nick else name.name
                 role = discord.Embed(description=name, colour=discord.Color.red())
                 infomessage = "__{}__ has left the server.".format(member.nick if member.nick else member.name)

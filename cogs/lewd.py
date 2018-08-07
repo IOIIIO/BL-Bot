@@ -44,6 +44,10 @@ class Lewd:
                 user = ctx.message.author
                 msg = " You try to cuddle the bot but end up hugging a metal box."
                 await self.bot.say(user.mention + msg)
+            elif user.id == ctx.message.author.id:
+                user = ctx.message.author
+                msg = " You wrap your arms around yourself."
+                await self.bot.say(user.mention + msg)
             else:
                 await self.bot.say(randchoice(self.cuddles).format(victim=user.display_name, cuddler=ctx.message.author.display_name))
         elif user is None:
@@ -114,7 +118,6 @@ class Lewd:
 That is {how} gay.""".format(gay=user.display_name, cent=percent, how=amount)
         random.setstate(state)
         await self.bot.say(message)
-
 
 def checks():
     if not os.path.exists('data/lewd'):
