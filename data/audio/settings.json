@@ -1,0 +1,18 @@
+{
+    "AVCONV" : false,
+    "MAX_CACHE" : 0,
+    "MAX_LENGTH" : 3700,
+    "SERVERS" : {
+        "412198633002500107" : {
+            "NOPPL_DISCONNECT" : true,
+            "VOLUME" : 50,
+            "VOTE_ENABLED" : true,
+            "VOTE_THRESHOLD" : 50
+        }
+    },
+    "SOUNDCLOUD_CLIENT_ID" : null,
+    "TITLE_STATUS" : true,
+    "VOLUME" : 50,
+    "VOTE_ENABLED" : true,
+    "VOTE_THRESHOLD" : 50
+}
