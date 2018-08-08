@@ -18,6 +18,7 @@ class Lewd:
         self.hold_person = fileIO("data/lewd/hand/person.json","load")
         self.hold_nothing = fileIO("data/lewd/hand/nothing.json","load")
         self.hug_list = fileIO("data/lewd/hug.json", "load")
+        self.hug_gifs = fileIO("data/lewd/gifs.json", "load")
 
     @commands.command(pass_context=True, no_pm=False)
     async def handhold(self, ctx, user : discord.Member=None):
@@ -102,10 +103,13 @@ class Lewd:
             num = random.randint(1, 16)
             random.setstate(state)
             channel = ctx.message.channel
-            msg = 'data/lewd/hugs/{}.gif'.format(num)
+            #msg = 'data/lewd/hugs/{}.gif'.format(num)
             msg2 = "*{hugger}* pulls *{hugged}* in for a hug.".format(hugger=ctx.message.author.display_name, hugged=user.display_name)
-            await self.bot.send_file(channel, msg)
-            await self.bot.say(msg2)
+            #await self.bot.send_file(channel, msg)
+            #await self.bot.say(msg2)
+            em = discord.Embed(color=discord.Color.green(), title=msg2)
+            em.set_image(url=randchoice(self.hug_gifs))
+            await self.bot.send_message(ctx.message.channel, embed = em)
             
 
         else:

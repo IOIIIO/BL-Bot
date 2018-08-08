@@ -1,9 +1,0 @@
-{
-    "AUTHOR" : "Twentysix",
-    "SHORT" : "Talk with Cleverbot!",
-    "DESCRIPTION" : "Allows for interaction with cleverbot.com through mention/command",
-    "DISABLED" : false,
-    "NAME" : "Cleverbot",
-    "TAGS" : ["chatbot", "cleverbot", "conversation"],
-    "INSTALL_MSG" : "Needs to be setup with an API key first. See `[p]cleverbot apikey`\n[p]cleverbot <text>` to talk with cleverbot.\n`@Mention <text>` works too.\n`[p]cleverbot toggle` disables replies by mention."
-}
