@@ -41,7 +41,7 @@ class Eat:
         self.drink_thing.append('you take a big sip of *{victim}*. *Delicious.*')
         self.drink_thing.append('your straw sinks into *{victim}* - it tastes satisfying.')
         self.drink_thing.append('you thirstly guzzle *{victim}*, it\'s lovely!')
-        self.drink_thing.append('you just can\'t bring yourself to drimk *{victim}* - so you just hold it for awhile...')
+        self.drink_thing.append('you just can\'t bring yourself to drink *{victim}* - so you just hold it for awhile...')
         self.drink_thing.append('you attempt to drain *{victim}*, but you\'re clumsier than you remember - and fail...')
 
 
