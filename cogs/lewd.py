@@ -34,7 +34,7 @@ class Lewd:
             else:
                 await self.bot.say(randchoice(self.hold_person).format(victim=user.display_name, holder=ctx.message.author.display_name))
         elif user is None:
-            await self.bot.say("You try to cuddle with air.")
+            await self.bot.say("You try to hold hands with air.")
         else:
             await self.bot.say(randchoice(self.hold_person).format(victim=user.display_name, holder=ctx.message.author.display_name))
 
