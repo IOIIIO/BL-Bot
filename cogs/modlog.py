@@ -91,7 +91,7 @@ class ModLog:
         server = ctx.message.server
         db = fileIO(self.direct, "load")
         if not server.id in db:
-            await self.bot.say("Server not found, use modlogset to set a channnel")
+            await self.bot.say("Server not found, use modlogset to set a channel")
             return
         del db[server.id]
         fileIO(self.direct, "save", db)
