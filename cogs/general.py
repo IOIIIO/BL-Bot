@@ -53,7 +53,7 @@ class General:
     #async def avatar(self, context, user : discord.Member):
     #    """Shows an users avatar."""
     #    if user != None:
-    #        message = context.message.discord.Member.avatar_url
+    #        message = context.message.user.avatar_url
     #    else:
     #        message = context.message.author.avatar_url
     #    await self.bot.say(message)
