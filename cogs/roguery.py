@@ -9,7 +9,8 @@ class roguery:
 
     @commands.command(pass_context=True)
     async def ded(self, ctx):
-        await self.bot.say("https://giphy.com/gifs/bare-barren-Az1CJ2MEjmsp2")
+        #await self.bot.say("https://giphy.com/gifs/bare-barren-Az1CJ2MEjmsp2")
+        await self.bot.send_file(ctx.message.channel, 'data/ded/ded.gif')
 
 
 def setup(bot):

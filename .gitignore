@@ -2,10 +2,10 @@
 *.pyc
 __pycache__
 data
-!data/trivia/*
-!data/audio/playlists/*
-!data/insult/*
-!data/compliment/*
-!data/lewd/*
+!data/trivia/
+!data/audio/playlists/
+!data/insult/
+!data/compliment/
+!data/lewd/
 *.exe
 *.dll
