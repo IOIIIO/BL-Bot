@@ -10,6 +10,7 @@ class Clippy:
 
     def __init__(self, bot):
         self.bot = bot
+        #self.height = 0
 
     def text_wrap(self, text, font, max_width):
         # Replace \n, \r, and \t with a space
@@ -39,17 +40,43 @@ class Clippy:
                 # add the line to the lines array
                 lines.append(line)
         return lines
+
+    async def imagehilda(self, xc, yc, size, text, ix, ln, tp):
+        if tp == 1:
+            image = Image.open('data/images/hilda.png')
+        else:
+            image = Image.open('data/images/clippy.png')
+        image_size = image.size
+        image_height = image.size[1]
+        image_width = image.size[0]
+        if tp == 0:
+            ix = (image_width/2)
+        draw = ImageDraw.Draw(image)
+        
+        font = ImageFont.truetype('data/images/comic.ttf', size=size)
+        #340 is the width we want to set the image width to
+        lines = self.text_wrap(text, font, ln)
+        line_height = font.getsize('hg')[1]
+        (x, y) = (xc, yc)
+        color = 'rgb(0, 0, 0)' # black color
+        text_size = draw.textsize(text, font=font)
+
+        for line in lines:
+            text_size = draw.textsize(line, font=font)
+            #image_x = (image_width /2 ) - (text_size[0]/2)
+            image_x = ix - (text_size[0]/2)
+            draw.text((image_x, y), line, fill=color, font=font)
+            y = y + line_height
+            self.height = y
+            print(self.height)
+
+        self.image = image 
     
     @commands.command(pass_context=True)
     async def clippy(self, ctx, *,text: str = ""):
         """I *know* you wanted some help with something - what was it?"""
-        image = Image.open('data/images/clippy.png')
-        image_size = image.size
-        image_height = image.size[1]
-        image_width = image.size[0]
-        draw = ImageDraw.Draw(image)
-        server = ctx.message.channel
 
+        server = ctx.message.channel
         clippy_errors = [
             "I guess I couldn't print that... whatever it was.",
             "It looks like you're trying to break things!  Maybe I can help.",
@@ -62,37 +89,36 @@ class Clippy:
         if not len(text):
             text = random.choice(clippy_errors)
 
-        font = ImageFont.truetype('data/images/comic.ttf', size=20)
-        #340 is the width we want to set the image width to
-        lines = self.text_wrap(text, font, 340)
-        line_height = font.getsize('hg')[1]
-        (x, y) = (25, 20)
-        color = 'rgb(0, 0, 0)' # black color
-        text_size = draw.textsize(text, font=font)
-
-        for line in lines:
-            text_size = draw.textsize(line, font=font)
-            image_x = (image_width /2 ) - (text_size[0]/2)
-            draw.text((image_x, y), line, fill=color, font=font)
-            y = y + line_height
-
-        image.save('data/images/clippynow.png')
-        await self.bot.send_file(server, 'data/images/clippynow.png')
-
-        # Remove the png
-        os.remove("data/images/clippynow.png")
+        await self.imagehilda(25, 20, 20, text, 84, 340, 0)
+        if self.height > 181:
+            s = 20
+            while self.height > 181 and s > 9:
+                s = s-1
+                if s < 11:
+                    await self.bot.say("I'm sorry, that message is too long.")
+                    abort = 1
+                    break    
+                else:
+                    await self.imagehilda(25, 20, s, text, s, 340, 0)
+                    abort = 0
+            if abort == 0:
+                self.image.save('data/images/clippynow.png')
+                await self.bot.send_file(server, 'data/images/clippynow.png')
+                # Remove the png
+                os.remove("data/images/clippynow.png")           
+        else:
+            self.image.save('data/images/clippynow.png')
+            await self.bot.send_file(server, 'data/images/clippynow.png')
+            # Remove the png
+            os.remove("data/images/clippynow.png")
 
     @commands.command(pass_context=True)
     async def hilda(self, ctx, *,text: str = ""):
         """Is this a meme?"""
-        image = Image.open('data/images/hilda.png')
-        image_size = image.size
-        image_height = image.size[1]
-        image_width = image.size[0]
-        draw = ImageDraw.Draw(image)
+        
+        abort = 0
         server = ctx.message.channel
-
-        clippy_errors = [
+        hilda_errors = [
             "I guess I couldn't print that... whatever it was.",
             "It looks like you're trying to break things!  Maybe I can help.",
             "Whoops, I guess I wasn't coded to understand that.",
@@ -102,25 +128,28 @@ class Clippy:
         ]
 
         if not len(text):
-            text = random.choice(clippy_errors)
+            text = random.choice(hilda_errors)
 
-        font = ImageFont.truetype('data/images/comic.ttf', size=40)
-        #340 is the width we want to set the image width to
-        lines = self.text_wrap(text, font, 450)
-        line_height = font.getsize('hg')[1]
-        (x, y) = (477, 120)
-        color = 'rgb(0, 0, 0)' # black color
-        text_size = draw.textsize(text, font=font)
 
-        for line in lines:
-            text_size = draw.textsize(line, font=font)
-            #image_x = (image_width /2 ) - (text_size[0]/2)
-            image_x = 460 - (text_size[0]/2)
-            draw.text((image_x, y), line, fill=color, font=font)
-            y = y + line_height 
-
-        image.save('data/images/hildanow.png')
-        await self.bot.send_file(server, 'data/images/hildanow.png')
-
-        # Remove the png
-        os.remove("data/images/hildanow.png")
+        await self.imagehilda(477, 120, 40, text, 460, 450, 1)
+        if self.height > 353:
+            s = 40
+            while self.height > 353 and s > 18:
+                s = s-1
+                if s < 20:
+                    await self.bot.say("I'm sorry, that message is too long.")
+                    abort = 1
+                    break    
+                else:
+                    await self.imagehilda(477, 120, s, text, 460, 450, 1)
+                    abort = 0
+            if abort == 0:
+                self.image.save('data/images/hildanow.png')
+                await self.bot.send_file(server, 'data/images/hildanow.png')
+                # Remove the png
+                os.remove("data/images/hildanow.png")           
+        else:
+            self.image.save('data/images/hildanow.png')
+            await self.bot.send_file(server, 'data/images/hildanow.png')
+            # Remove the png
+            os.remove("data/images/hildanow.png")
