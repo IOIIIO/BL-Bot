@@ -54,7 +54,6 @@ class Clippy:
         draw = ImageDraw.Draw(image)
         
         font = ImageFont.truetype('data/images/comic.ttf', size=size)
-        #340 is the width we want to set the image width to
         lines = self.text_wrap(text, font, ln)
         line_height = font.getsize('hg')[1]
         (x, y) = (xc, yc)
