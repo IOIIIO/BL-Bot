@@ -50,10 +50,6 @@ class Clippy:
         draw = ImageDraw.Draw(image)
         server = ctx.message.channel
 
-        text = text
-        # Remove any non-ascii chars
-        text = ''.join([i for i in text if ord(i) < 128])
-
         clippy_errors = [
             "I guess I couldn't print that... whatever it was.",
             "It looks like you're trying to break things!  Maybe I can help.",
@@ -95,10 +91,6 @@ class Clippy:
         image_width = image.size[0]
         draw = ImageDraw.Draw(image)
         server = ctx.message.channel
-
-        text = text
-        # Remove any non-ascii chars
-        text = ''.join([i for i in text if ord(i) < 128])
 
         clippy_errors = [
             "I guess I couldn't print that... whatever it was.",
