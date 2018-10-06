@@ -6,3 +6,5 @@ psutil
 pillow
 beautifulsoup4
 speedtest-cli
+aiohttp
+websockets
