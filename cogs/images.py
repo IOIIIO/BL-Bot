@@ -111,7 +111,7 @@ class Clippy:
             # Remove the png
             os.remove("data/images/clippynow.png")
 
-    @commands.command(pass_context=True)
+    @commands.command(aliases=["Hilda"], pass_context=True)
     async def hilda(self, ctx, *,text: str = ""):
         """Is this a meme?"""
         
