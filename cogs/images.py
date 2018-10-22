@@ -67,7 +67,6 @@ class Clippy:
             draw.text((image_x, y), line, fill=color, font=font)
             y = y + line_height
             self.height = y
-            print(self.height)
 
         self.image = image 
     
@@ -92,7 +91,7 @@ class Clippy:
         if self.height > 181:
             s = 20
             while self.height > 181 and s > 9:
-                s = s-1
+                s = s-2
                 if s < 11:
                     await self.bot.say("I'm sorry, that message is too long.")
                     abort = 1
@@ -104,12 +103,18 @@ class Clippy:
                 self.image.save('data/images/clippynow.png')
                 await self.bot.send_file(server, 'data/images/clippynow.png')
                 # Remove the png
-                os.remove("data/images/clippynow.png")           
+                try:
+                    os.remove("data/images/clippynow.png")   
+                except:
+                    return
         else:
             self.image.save('data/images/clippynow.png')
             await self.bot.send_file(server, 'data/images/clippynow.png')
             # Remove the png
-            os.remove("data/images/clippynow.png")
+            try:
+                os.remove("data/images/clippynow.png")
+            except:
+                    return
 
     @commands.command(aliases=["Hilda"], pass_context=True)
     async def hilda(self, ctx, *,text: str = ""):
@@ -134,7 +139,7 @@ class Clippy:
         if self.height > 353:
             s = 40
             while self.height > 353 and s > 18:
-                s = s-1
+                s = s-2
                 if s < 20:
                     await self.bot.say("I'm sorry, that message is too long.")
                     abort = 1
@@ -146,9 +151,15 @@ class Clippy:
                 self.image.save('data/images/hildanow.png')
                 await self.bot.send_file(server, 'data/images/hildanow.png')
                 # Remove the png
-                os.remove("data/images/hildanow.png")           
+                try:
+                    os.remove("data/images/hildanow.png")
+                except:
+                    return           
         else:
             self.image.save('data/images/hildanow.png')
             await self.bot.send_file(server, 'data/images/hildanow.png')
             # Remove the png
-            os.remove("data/images/hildanow.png")
+            try:
+                os.remove("data/images/hildanow.png")
+            except:
+                    return
