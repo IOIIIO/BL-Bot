@@ -261,7 +261,7 @@ class ModLog:
             return
         #if message.author is message.author.bot:
         #    pass
-        if message.channel.id in db[server.id]['errata']:
+        if message.channel.id in db[server.id]["errata"]:
             return
         channel = db[server.id]["Channel"]
         time = datetime.datetime.now()
@@ -488,7 +488,7 @@ class ModLog:
             return
         if db[server.id]['toggleedit'] == False:
             return
-        if before.channel.id in db[server.id]['errata']:
+        if before.channel.id in db[server.id]["errata"]:
             return
         if before.content == after.content:
             return
