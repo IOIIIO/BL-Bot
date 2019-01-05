@@ -1468,6 +1468,10 @@ class Audio:
 
         url = url.strip("<>")
 
+        if "playlist" in url:
+            await self.bot.say("Use the `{}playlist` command to play playlists.".format(ctx.prefix))
+            return
+
         if self._match_any_url(url):
             if not self._valid_playable_url(url):
                 await self.bot.say("That's not a valid URL.")
