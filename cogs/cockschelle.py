@@ -1,5 +1,6 @@
 import discord, os, random
 from discord.ext import commands
+from cogs.utils import checks
 from PIL import Image, ImageDraw, ImageFont
 import requests
 from io import BytesIO
@@ -32,6 +33,7 @@ class cockschelle:
         self.cache = "data/images/cache.json"
         self.od = "551920404642398238"
 
+    @checks.admin_or_permissions(administrator=True)
     @commands.command(pass_context=True)
     async def allowschelle(self, ctx, chan:discord.Channel):
         """Enable cockschelle in a channel. This locks it in all other channels."""
