@@ -1,5 +1,5 @@
 pip
-git+git://github.com/Rapptz/discord.py.git
+git+https://github.com/IOIIIO/discord.py.git
 youtube_dl
 imgurpython
 psutil

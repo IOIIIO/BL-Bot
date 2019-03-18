@@ -1,5 +1,5 @@
 pip
-discord.py[voice]
+git+https://github.com/IOIIIO/discord.py.git[voice]
 youtube_dl
 imgurpython
 pillow
