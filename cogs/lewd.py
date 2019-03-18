@@ -155,7 +155,7 @@ If you execute it again, you will be switched back to the new style."""
         This is 100% accurate."""
         state = random.getstate()
         random.seed(user.id)
-        percent = random.randint(0, 100)
+        percent = random.randint(0, 101)
         if percent == 0:
             amount = "not at all"
         elif percent < 10:
