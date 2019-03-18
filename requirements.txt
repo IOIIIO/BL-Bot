@@ -1,6 +1,6 @@
 pip
 git+https://github.com/IOIIIO/discord.py.git[voice]
-youtube_dl
+youtube-dl
 imgurpython
 pillow
 psutil
