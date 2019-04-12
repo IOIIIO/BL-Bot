@@ -9,8 +9,14 @@ class ship:
     @commands.command()
     async def ship(self, user1 : discord.Member, user2 : discord.Member):
         """Creates a ship name for two users"""
-        name1 = user1.nick
-        name2 = user2.nick
+        if user1.nick != None:
+            name1 = user1.nick
+        else:
+            name1 = user1.name
+        if user2.nick != None:
+            name2 = user2.nick
+        else:
+            name2 = user2.name
         name2 = name2[::-1]
         x = int(len(name1)/2)
         y = int(len(name2)/2)
