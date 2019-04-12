@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 
-class tester:
+class ship:
 
     def __init__(self, bot):
         self.bot = bot
@@ -21,4 +21,4 @@ class tester:
         await self.bot.say(message)
 
 def setup(bot):
-    bot.add_cog(tester(bot))
+    bot.add_cog(ship(bot))
