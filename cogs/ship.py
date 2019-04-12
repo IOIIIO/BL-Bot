@@ -17,14 +17,18 @@ class ship:
             name2 = user2.nick
         else:
             name2 = user2.name
-        name2 = name2[::-1]
-        x = int(len(name1)/2)
-        y = int(len(name2)/2)
-        name1 = name1[:-x]
-        name2 = name2[:-y]
-        name2 = name2[::-1]
-        message = "❤️ Your ship name is *{namex}{namey}* ❤️".format(namex=name1, namey=name2)
-        await self.bot.say(message)
+        if name1 != name2:
+            name2 = name2[::-1]
+            x = int(len(name1)/2)
+            y = int(len(name2)/2)
+            name1 = name1[:-x]
+            name2 = name2[:-y]
+            name2 = name2[::-1]
+            message = "❤️ Your ship name is *{namex}{namey}* ❤️".format(namex=name1, namey=name2)
+            await self.bot.say(message)
+        else:
+            message = "❤️You love yourself, your ship name is *{namex}xSelf* ❤️".format(namex=name1)
+            await self.bot.say(message)
 
 def setup(bot):
     bot.add_cog(ship(bot))
