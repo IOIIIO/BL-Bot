@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 
-class tester:
+class ship:
 
     def __init__(self, bot):
         self.bot = bot
@@ -9,8 +9,8 @@ class tester:
     @commands.command()
     async def ship(self, user1 : discord.Member, user2 : discord.Member):
         """Creates a ship name for two users"""
-        name1 = user1.name
-        name2 = user2.name
+        name1 = user1.nick
+        name2 = user2.nick
         name2 = name2[::-1]
         x = int(len(name1)/2)
         y = int(len(name2)/2)
@@ -21,4 +21,4 @@ class tester:
         await self.bot.say(message)
 
 def setup(bot):
-    bot.add_cog(tester(bot))
+    bot.add_cog(ship(bot))

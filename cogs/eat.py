@@ -5,7 +5,6 @@ from discord.ext import commands
 from cogs.utils.dataIO import fileIO
 from .utils.chat_formatting import italics
 
-
 class eat:
     """Remind the chat how dead it is"""
     
@@ -47,9 +46,6 @@ class eat:
             db = fileIO(self.direct, "load")
             message = str(randchoice(db["eat"]["nothing"]))
             await self.bot.say(italics(context.message.author.display_name)+ ', ' + message)
-
-
-
 
 def setup(bot):
     bot.add_cog(eat(bot))
