@@ -172,6 +172,8 @@ If you execute it again, you will be switched back to the new style."""
             amount = "hella"
         elif percent < 101:
             amount = "totally"
+        else:
+            amount = "off the charts"
         message = """*{gay}* is {cent}% gay
 That is {how} gay.""".format(gay=user.display_name, cent=percent, how=amount)
         random.setstate(state)
