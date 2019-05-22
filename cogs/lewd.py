@@ -156,6 +156,8 @@ If you execute it again, you will be switched back to the new style."""
         state = random.getstate()
         random.seed(user.id)
         percent = random.randint(0, 101)
+        if str(user.id) == '263497047800283156':
+            percent = 10000000
         if percent == 0:
             amount = "not at all"
         elif percent < 10:
