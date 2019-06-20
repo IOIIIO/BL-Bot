@@ -31,7 +31,7 @@ If you execute it again, you will be switched back off."""
         if lserver in self.settings:
             self.settings.remove(lserver)
             fileIO("data/communism/communism.json", "save", self.settings)
-            await self.bot.say("I will no longer resond")
+            await self.bot.say("I will no longer respond")
         else:
             self.settings.append(lserver)
             fileIO("data/communism/communism.json", "save", self.settings)
