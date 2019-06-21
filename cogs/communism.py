@@ -13,6 +13,7 @@ class communism:
         self.bot = bot
         self.settings = fileIO("data/communism/communism.json", "load")
         self.exclude = fileIO("data/communism/exclude.json", "load")
+        self.mute = fileIO("data/communism/users.json", "load")
 
 
     @commands.group(pass_context=True, no_pm=True)
@@ -23,7 +24,7 @@ class communism:
 
     @checks.admin_or_permissions(administrator=True)
     @communism.command(name="enable", no_pm=True, pass_context=True)
-    async def enable(self, ctx):
+    async def _enable(self, ctx):
         """Execute this command if you want BL-Bot to respond to your filthy capitalism (administrators only)
 If you execute it again, you will be switched back off."""
         self.settings = fileIO("data/communism/communism.json", "load")
@@ -61,32 +62,55 @@ If you execute it again, you will be switched back off."""
             fileIO("data/communism/exclude.json", "save", self.exclude)
             await self.bot.say("I will no longer respond in this channel") 
 
+    @communism.command(name="mute", no_pm=True, pass_context=True)
+    async def _mute(self, ctx):
+        """Execute this command if you want BL-Bot to respond to your filthy capitalism
+If you execute it again, you will be switched back off."""
+        self.mute = fileIO("data/communism/users.json", "load")
+        luser = ctx.message.author.id
+        if luser in self.mute:
+            self.mute.remove(luser)
+            fileIO("data/communism/users.json", "save", self.mute)
+            await self.bot.say("I will now respond to you")
+        else:
+            self.mute.append(luser)
+            fileIO("data/communism/users.json", "save", self.mute)
+            await self.bot.say("I will no longer respond to you!")
+
     async def on_message(self, message):
         lserver = message.server.id
         channel = message.channel.id
+        user = message.author.id
         self.settings = fileIO("data/communism/communism.json", "load")
         self.exclude = fileIO("data/communism/exclude.json", "load")
+        self.mute = fileIO("data/communism/users.json", "load")
         if lserver in self.settings:
             if channel not in self.exclude:
-                if message.author != self.bot.user:
-                    if find_substring("your", message.content.lower()):
-                        answer = message.content.lower().split("your")[1]
-                        await self.bot.send_message(message.channel, "our" + answer)
-                    elif find_substring("yours", message.content.lower()):
-                        answer = message.content.lower().split("yours")[1]
-                        await self.bot.send_message(message.channel, "our" + answer)
-                    elif find_substring("my", message.content.lower()):
-                        answer = message.content.lower().split("my")[1]
-                        await self.bot.send_message(message.channel, "our" + answer)
-                    elif find_substring("mine", message.content.lower()):
-                        answer = message.content.lower().split("mine")[1]
-                        await self.bot.send_message(message.channel, "our" + answer)
-                    elif find_substring("his", message.content.lower()):
-                        answer = message.content.lower().split("his")[1]
-                        await self.bot.send_message(message.channel, "our" + answer)
-                    elif find_substring("hers", message.content.lower()):
-                        answer = message.content.lower().split("hers")[1]
-                        await self.bot.send_message(message.channel, "our" + answer)
+                if user not in self.mute:
+                    if message.author != self.bot.user:
+                        if find_substring("your", message.content.lower()):
+                            answer = message.content.lower().split("your")[1]
+                            await self.bot.send_message(message.channel, "*OUR" + answer + ", comrade")
+                        elif find_substring("yours", message.content.lower()):
+                            answer = message.content.lower().split("yours")[1]
+                            await self.bot.send_message(message.channel, "*OUR" + answer + ", comrade")
+                        elif find_substring("my", message.content.lower()):
+                            answer = message.content.lower().split("my")[1]
+                            await self.bot.send_message(message.channel, "*OUR" + answer + ", comrade")
+                        elif find_substring("mine", message.content.lower()):
+                            answer = message.content.lower().split("mine")[1]
+                            await self.bot.send_message(message.channel, "*OUR" + answer + ", comrade")
+                        elif find_substring("his", message.content.lower()):
+                            answer = message.content.lower().split("his")[1]
+                            await self.bot.send_message(message.channel, "*OUR" + answer + ", comrade")
+                        elif find_substring("hers", message.content.lower()):
+                            answer = message.content.lower().split("hers")[1]
+                            await self.bot.send_message(message.channel, "*OUR" + answer + ", comrade")
+                        elif find_substring("their", message.content.lower()):
+                            answer = message.content.lower().split("their")[1]
+                            await self.bot.send_message(message.channel, "*OUR" + answer + ", comrade")
+                    else:
+                        return
                 else:
                     return
             else:
@@ -105,6 +129,9 @@ def checks():
     if not dataIO.is_valid_json('data/communism/exclude.json'):
         print('Creating data/communism/exclude.json...')
         dataIO.save_json('data/communism/exclude.json', [])
+    if not dataIO.is_valid_json('data/communism/users.json'):
+        print('Creating data/communism/users.json...')
+        dataIO.save_json('data/communism/users.json', [])
 
 def find_substring(needle, haystack): # credits to aronasterling on Stack Overflow
     index = haystack.find(needle)
