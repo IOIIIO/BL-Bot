@@ -67,8 +67,13 @@ If you execute it again, you will be switched back."""
         self.exclude = fileIO("data/alexa/exclude.json", "load")
         if lserver in self.settings:
             if channel not in self.exclude:
-                if "this is so sad" in message.content.lower():
-                    await self.bot.send_message(message.channel, 'Alexa play Despacito \nhttps://www.youtube.com/watch?v=kJQP7kiw5Fk')
+                if message.author.bot == False:
+                    if "this is so sad" in message.content.lower():
+                        await self.bot.send_message(message.channel, 'Alexa play Despacito \nhttps://www.youtube.com/watch?v=kJQP7kiw5Fk')
+                    else:
+                        return
+                else:
+                    return
             else:
                 return
         else: 

@@ -77,6 +77,14 @@ If you execute it again, you will be switched back off."""
             fileIO("data/communism/users.json", "save", self.mute)
             await self.bot.say("I will no longer respond to you!")
 
+    async def communize(self, text, channel): # Credits to CorpNewt for the improved communism 
+        parts = text.replace("\t"," ").replace("\n"," ").split(" ")
+        find  = ["your","yours","my","mine","his","hers","their","theirs","its"]
+        exclude = ["he's","she's","it's","that's","what's","who's"]
+        communist = ["OUR" if (x.lower() in find or x.lower().endswith("'s") and x.lower() not in exclude) else x for x in parts]
+        if communist != parts :
+            await self.bot.send_message(channel, " ".join(communist).rstrip(".,!?")+", comrade.")
+
     async def on_message(self, message):
         lserver = message.server.id
         channel = message.channel.id
@@ -84,40 +92,8 @@ If you execute it again, you will be switched back off."""
         self.settings = fileIO("data/communism/communism.json", "load")
         self.exclude = fileIO("data/communism/exclude.json", "load")
         self.mute = fileIO("data/communism/users.json", "load")
-        if lserver in self.settings:
-            if channel not in self.exclude:
-                if user not in self.mute:
-                    if message.author != self.bot.user:
-                        if find_substring("your", message.content.lower()):
-                            answer = message.content.lower().split("your")[1]
-                            await self.bot.send_message(message.channel, "*OUR" + answer + ", comrade")
-                        elif find_substring("yours", message.content.lower()):
-                            answer = message.content.lower().split("yours")[1]
-                            await self.bot.send_message(message.channel, "*OUR" + answer + ", comrade")
-                        elif find_substring("my", message.content.lower()):
-                            answer = message.content.lower().split("my")[1]
-                            await self.bot.send_message(message.channel, "*OUR" + answer + ", comrade")
-                        elif find_substring("mine", message.content.lower()):
-                            answer = message.content.lower().split("mine")[1]
-                            await self.bot.send_message(message.channel, "*OUR" + answer + ", comrade")
-                        elif find_substring("his", message.content.lower()):
-                            answer = message.content.lower().split("his")[1]
-                            await self.bot.send_message(message.channel, "*OUR" + answer + ", comrade")
-                        elif find_substring("hers", message.content.lower()):
-                            answer = message.content.lower().split("hers")[1]
-                            await self.bot.send_message(message.channel, "*OUR" + answer + ", comrade")
-                        elif find_substring("their", message.content.lower()):
-                            answer = message.content.lower().split("their")[1]
-                            await self.bot.send_message(message.channel, "*OUR" + answer + ", comrade")
-                    else:
-                        return
-                else:
-                    return
-            else:
-                return
-        else: 
-            return
-            
+        if all([lserver in self.settings, channel not in self.exclude, user not in self.mute, message.author.bot == False]):
+            await self.communize(str(message.content), message.channel)
 
 def checks():
     if not os.path.exists('data/communism'):
@@ -132,17 +108,6 @@ def checks():
     if not dataIO.is_valid_json('data/communism/users.json'):
         print('Creating data/communism/users.json...')
         dataIO.save_json('data/communism/users.json', [])
-
-def find_substring(needle, haystack): # credits to aronasterling on Stack Overflow
-    index = haystack.find(needle)
-    if index == -1:
-        return False
-    if index != 0 and haystack[index-1] not in string.whitespace:
-        return False
-    L = index + len(needle)
-    if L < len(haystack) and haystack[L] not in string.whitespace:
-        return False
-    return True
 
 def setup(bot):
     checks()
