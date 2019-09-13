@@ -80,7 +80,7 @@ If you execute it again, you will be switched back off."""
     async def communize(self, text, channel): # Credits to CorpNewt for the improved communism 
         parts = text.replace("\t"," ").replace("\n"," ").split(" ")
         find  = ["your","yours","my","mine","his","hers","their","theirs","its"]
-        exclude = ["he's","she's","it's","that's","what's","who's"]
+        exclude = ["he's","she's","it's","that's","what's","who's","there's"]
         communist = ["OUR" if (x.lower() in find or x.lower().endswith("'s") and x.lower() not in exclude) else x for x in parts]
         if communist != parts :
             await self.bot.send_message(channel, " ".join(communist).rstrip(".,!?")+", comrade.")
